@@ -1,18 +1,10 @@
 # partner-service-csharp
-simple C# Kafka Producer
+Simple C# Kafka Producer
 
-Corresponding Kafka Connect MongoDB Sink Connector Configuration:
+## Extensions for Visual Studio Code
+- C# (ms-vscode.csharp)
+- Nuget Paket Manager (jmrog.vscode-nuget-package)
 
-{
-  "connector.class": "com.datamountaineer.streamreactor.connect.mongodb.sink.MongoSinkConnector",
-  "value.converter.schema.registry.url": "http://localhost:8081",
-  "connect.mongo.connection": "mongodb://localhost:27017",
-  "connect.mongo.kcql": "INSERT INTO partners SELECT * FROM partnerCreated",
-  "topics": "partnerCreated",
-  "tasks.max": "1",
-  "name": "MongoSinkConnector",
-  "connect.mongo.db": "test",
-  "value.converter": "io.confluent.connect.avro.AvroConverter",
-  "key.converter": "io.confluent.connect.avro.AvroConverter",
-  "key.converter.schema.registry.url": "http://localhost:8081"
-}
+## Installation
+- [.NET Core](https://www.microsoft.com/net/learn/dotnet/hello-world-tutorial)
+- [Confluent Kafka .NET Client](https://github.com/confluentinc/confluent-kafka-dotnet)

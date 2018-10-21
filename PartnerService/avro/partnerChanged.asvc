@@ -3,7 +3,7 @@
   "type": "record",
   "name": "PartnerChanged",
   "fields": [
-    { "name": "id", "type": "long" },
+    { "name": "id", "type": "string" },
     { "name": "Name",
       "type": ["null", {
         "name": "Name",

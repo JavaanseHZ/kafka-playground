@@ -8,8 +8,8 @@ using de.partner.created;
 namespace PartnerService.Producers {
     public class PartnerProducer : IPartnerProducer {
         private AvroSerdeProvider serdeProvider;
-        private  Producer<long, PartnerChanged> producerChanged;
-        private  Producer<long, PartnerCreated> producerCreated;
+        private  Producer<String, PartnerChanged> producerChanged;
+        private  Producer<String, PartnerCreated> producerCreated;
         private ProducerConfig producerConfig = new ProducerConfig {BootstrapServers = "localhost:9092" };
         private AvroSerdeProviderConfig avroConfig = new AvroSerdeProviderConfig {
             SchemaRegistryUrl = "http://localhost:8081",
@@ -21,37 +21,37 @@ namespace PartnerService.Producers {
 
         public PartnerProducer() {
             serdeProvider = new AvroSerdeProvider(avroConfig);
-            producerChanged = new Producer<long, PartnerChanged>(producerConfig, serdeProvider.GetSerializerGenerator<long>(), serdeProvider.GetSerializerGenerator<PartnerChanged>());
-            producerCreated = new Producer<long, PartnerCreated>(producerConfig, serdeProvider.GetSerializerGenerator<long>(), serdeProvider.GetSerializerGenerator<PartnerCreated>());
+            producerChanged = new Producer<String, PartnerChanged>(producerConfig, serdeProvider.GetSerializerGenerator<String>(), serdeProvider.GetSerializerGenerator<PartnerChanged>());
+            producerCreated = new Producer<String, PartnerCreated>(producerConfig, serdeProvider.GetSerializerGenerator<String>(), serdeProvider.GetSerializerGenerator<PartnerCreated>());
         }
 
         public void sendPartnerChanged(PartnerItem partnerItem) {
-            Action<DeliveryReportResult<long, PartnerChanged>> handler = r => 
+            Action<DeliveryReportResult<String, PartnerChanged>> handler = r => 
                 Console.WriteLine(!r.Error.IsError
                     ? $"Delivered message to {r.TopicPartitionOffset}"
                     : $"Delivery Error: {r.Error.Reason}");
                
                 var partnerName = new de.partner.changed.Name {firstname = partnerItem.firstname, lastname = partnerItem.lastname};
                 var partnerAddress = new de.partner.changed.Address {street = partnerItem.street, city = partnerItem.city};
-                var partnerChanged = new PartnerChanged{id = partnerItem.id, Name = partnerName, Address = partnerAddress};
+                var partnerChanged = new PartnerChanged{id = partnerItem.id.ToString(), Name = partnerName, Address = partnerAddress};
                 producerChanged
-                        .ProduceAsync("PartnerChanged", new Message<long, PartnerChanged> { Key = partnerItem.id, Value = partnerChanged})
+                        .ProduceAsync("PartnerChanged", new Message<String, PartnerChanged> { Key = partnerItem.id.ToString(), Value = partnerChanged})
                         .ContinueWith(task => task.IsFaulted
                             ? $"error producing message: {task.Exception.Message}"
                             : $"produced to: {task.Result.TopicPartitionOffset}");
         }
 
         public void sendPartnerCreated(PartnerItem partnerItem) {
-            Action<DeliveryReportResult<long, PartnerCreated>> handler = r => 
+            Action<DeliveryReportResult<String, PartnerCreated>> handler = r => 
                 Console.WriteLine(!r.Error.IsError
                     ? $"Delivered message to {r.TopicPartitionOffset}"
                     : $"Delivery Error: {r.Error.Reason}");
                
                 var partnerName = new de.partner.created.Name {firstname = partnerItem.firstname, lastname = partnerItem.lastname};
                 var partnerAddress = new de.partner.created.Address {street = partnerItem.street, city = partnerItem.city};
-                var partnerCreated = new PartnerCreated{id = partnerItem.id, Name = partnerName, Address = partnerAddress};
+                var partnerCreated = new PartnerCreated{id = partnerItem.id.ToString(), Name = partnerName, Address = partnerAddress};
                 producerCreated
-                        .ProduceAsync("PartnerCreated", new Message<long, PartnerCreated> { Key = partnerItem.id, Value = partnerCreated})
+                        .ProduceAsync("PartnerCreated", new Message<String, PartnerCreated> { Key = partnerItem.id.ToString(), Value = partnerCreated})
                         .ContinueWith(task => task.IsFaulted
                             ? $"error producing message: {task.Exception.Message}"
                             : $"produced to: {task.Result.TopicPartitionOffset}");

@@ -15,8 +15,8 @@ namespace de.partner.created
 	
 	public partial class PartnerCreated : ISpecificRecord
 	{
-		public static Schema _SCHEMA = Schema.Parse(@"{""type"":""record"",""name"":""PartnerCreated"",""namespace"":""de.partner.created"",""fields"":[{""name"":""id"",""type"":""long""},{""name"":""Name"",""type"":[""null"",{""type"":""record"",""name"":""Name"",""namespace"":""de.partner.created"",""fields"":[{""name"":""firstname"",""type"":""string""},{""name"":""lastname"",""type"":""string""}]}]},{""name"":""Address"",""type"":[""null"",{""type"":""record"",""name"":""Address"",""namespace"":""de.partner.created"",""fields"":[{""name"":""street"",""type"":""string""},{""name"":""city"",""type"":""string""}]}]}]}");
-		private long _id;
+		public static Schema _SCHEMA = Schema.Parse(@"{""type"":""record"",""name"":""PartnerCreated"",""namespace"":""de.partner.created"",""fields"":[{""name"":""id"",""type"":""string""},{""name"":""Name"",""type"":[""null"",{""type"":""record"",""name"":""Name"",""namespace"":""de.partner.created"",""fields"":[{""name"":""firstname"",""type"":""string""},{""name"":""lastname"",""type"":""string""}]}]},{""name"":""Address"",""type"":[""null"",{""type"":""record"",""name"":""Address"",""namespace"":""de.partner.created"",""fields"":[{""name"":""street"",""type"":""string""},{""name"":""city"",""type"":""string""}]}]}]}");
+		private string _id;
 		private de.partner.created.Name _Name;
 		private de.partner.created.Address _Address;
 		public virtual Schema Schema
@@ -26,7 +26,7 @@ namespace de.partner.created
 				return PartnerCreated._SCHEMA;
 			}
 		}
-		public long id
+		public string id
 		{
 			get
 			{
@@ -73,7 +73,7 @@ namespace de.partner.created
 		{
 			switch (fieldPos)
 			{
-			case 0: this.id = (System.Int64)fieldValue; break;
+			case 0: this.id = (System.String)fieldValue; break;
 			case 1: this.Name = (de.partner.created.Name)fieldValue; break;
 			case 2: this.Address = (de.partner.created.Address)fieldValue; break;
 			default: throw new AvroRuntimeException("Bad index " + fieldPos + " in Put()");

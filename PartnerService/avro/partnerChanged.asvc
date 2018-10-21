@@ -1,7 +1,7 @@
 {
-  "namespace": "de.partner.created",
+  "namespace": "de.partner.changed",
   "type": "record",
-  "name": "PartnerCreated",
+  "name": "PartnerChanged",
   "fields": [
     { "name": "id", "type": "long" },
     { "name": "Name",

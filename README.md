@@ -1,6 +1,11 @@
 # kafka-playground
 Playground for Apache Kafka
 
+## Prerequisites
+```
+export HOSTNAME=${HOSTNAME}
+```
+
 ## Mongo DB Connector
 Corresponding Kafka Connect MongoDB Sink Connector Configuration for Topic partnerCreated:
 ```json

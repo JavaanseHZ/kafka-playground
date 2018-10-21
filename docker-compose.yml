@@ -15,4 +15,4 @@ services:
       - 8081-8083:8081-8083
       - 9092:9092
     environment:
-     - ADV_HOST= ${hostname}
+     - ADV_HOST=${HOSTNAME}

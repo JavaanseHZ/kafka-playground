@@ -2,7 +2,7 @@ using System;
 using Confluent.Kafka;
 using PartnerService.Models;
 using Confluent.Kafka.Serialization;
-using PartnerService.de.partner;
+using de.partner;
 
 namespace PartnerService.Controllers {
     public class PartnerProducer {
@@ -29,7 +29,8 @@ namespace PartnerService.Controllers {
                     : $"Delivery Error: {r.Error.Reason}");
                
                 var partnerName = new Name {firstname = partnerItem.firstname, lastname = partnerItem.lastname};
-                var partnerCreated = new PartnerCreated{id = partnerItem.id, name = partnerName};
+                var partnerAddress = new Address {street = partnerItem.street, city = partnerItem.city};
+                var partnerCreated = new PartnerCreated{id = partnerItem.id, Name = partnerName};
                 producer
                         .ProduceAsync("partnerCreated", new Message<long, PartnerCreated> { Key = partnerItem.id, Value = partnerCreated})
                         .ContinueWith(task => task.IsFaulted

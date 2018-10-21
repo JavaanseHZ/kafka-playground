@@ -5,7 +5,7 @@
 //    is regenerated
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace PartnerService.de.partner
+namespace de.partner
 {
 	using System;
 	using System.Collections.Generic;
@@ -15,9 +15,10 @@ namespace PartnerService.de.partner
 	
 	public partial class PartnerCreated : ISpecificRecord
 	{
-		public static Schema _SCHEMA = Schema.Parse(@"{""type"":""record"",""name"":""PartnerCreated"",""namespace"":""de.partner"",""fields"":[{""name"":""id"",""type"":""long""},{""name"":""name"",""type"":[""null"",{""type"":""record"",""name"":""Name"",""namespace"":""de.partner"",""fields"":[{""name"":""firstname"",""type"":""string""},{""name"":""lastname"",""type"":""string""}]}]}]}");
+		public static Schema _SCHEMA = Schema.Parse(@"{""type"":""record"",""name"":""PartnerCreated"",""namespace"":""de.partner"",""fields"":[{""name"":""id"",""type"":""long""},{""name"":""Name"",""type"":[""null"",{""type"":""record"",""name"":""Name"",""namespace"":""de.partner"",""fields"":[{""name"":""firstname"",""type"":""string""},{""name"":""lastname"",""type"":""string""}]}]},{""name"":""Address"",""type"":[""null"",{""type"":""record"",""name"":""Address"",""namespace"":""de.partner"",""fields"":[{""name"":""street"",""type"":""string""},{""name"":""city"",""type"":""string""}]}]}]}");
 		private long _id;
-		private de.partner.Name _name;
+		private de.partner.Name _Name;
+		private de.partner.Address _Address;
 		public virtual Schema Schema
 		{
 			get
@@ -36,15 +37,26 @@ namespace PartnerService.de.partner
 				this._id = value;
 			}
 		}
-		public de.partner.Name name
+		public de.partner.Name Name
 		{
 			get
 			{
-				return this._name;
+				return this._Name;
 			}
 			set
 			{
-				this._name = value;
+				this._Name = value;
+			}
+		}
+		public de.partner.Address Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				this._Address = value;
 			}
 		}
 		public virtual object Get(int fieldPos)
@@ -52,7 +64,8 @@ namespace PartnerService.de.partner
 			switch (fieldPos)
 			{
 			case 0: return this.id;
-			case 1: return this.name;
+			case 1: return this.Name;
+			case 2: return this.Address;
 			default: throw new AvroRuntimeException("Bad index " + fieldPos + " in Get()");
 			};
 		}
@@ -61,7 +74,8 @@ namespace PartnerService.de.partner
 			switch (fieldPos)
 			{
 			case 0: this.id = (System.Int64)fieldValue; break;
-			case 1: this.name = (de.partner.Name)fieldValue; break;
+			case 1: this.Name = (de.partner.Name)fieldValue; break;
+			case 2: this.Address = (de.partner.Address)fieldValue; break;
 			default: throw new AvroRuntimeException("Bad index " + fieldPos + " in Put()");
 			};
 		}

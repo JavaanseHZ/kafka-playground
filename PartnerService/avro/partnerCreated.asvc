@@ -4,9 +4,9 @@
   "name": "PartnerCreated",
   "fields": [
     { "name": "id", "type": "long" },
-    { "name": "name",
+    { "name": "Name",
       "type": ["null", {
-        "name": "name",
+        "name": "Name",
         "type": "record",
         "fields": [
           { "name": "firstname", "type": "string" },
@@ -14,9 +14,9 @@
         ]
       }]
     },
-    { "name": "address",
+    { "name": "Address",
       "type": ["null", {
-        "name": "address",
+        "name": "Address",
         "type": "record",
         "fields": [
           { "name": "street", "type": "string" },

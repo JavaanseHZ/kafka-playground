@@ -13,47 +13,47 @@ namespace de.partner
 	using global::Avro;
 	using global::Avro.Specific;
 	
-	public partial class Name : ISpecificRecord
+	public partial class Address : ISpecificRecord
 	{
-		public static Schema _SCHEMA = Schema.Parse("{\"type\":\"record\",\"name\":\"Name\",\"namespace\":\"de.partner\",\"fields\":[{\"name\":\"firstn" +
-				"ame\",\"type\":\"string\"},{\"name\":\"lastname\",\"type\":\"string\"}]}");
-		private string _firstname;
-		private string _lastname;
+		public static Schema _SCHEMA = Schema.Parse("{\"type\":\"record\",\"name\":\"Address\",\"namespace\":\"de.partner\",\"fields\":[{\"name\":\"str" +
+				"eet\",\"type\":\"string\"},{\"name\":\"city\",\"type\":\"string\"}]}");
+		private string _street;
+		private string _city;
 		public virtual Schema Schema
 		{
 			get
 			{
-				return Name._SCHEMA;
+				return Address._SCHEMA;
 			}
 		}
-		public string firstname
+		public string street
 		{
 			get
 			{
-				return this._firstname;
+				return this._street;
 			}
 			set
 			{
-				this._firstname = value;
+				this._street = value;
 			}
 		}
-		public string lastname
+		public string city
 		{
 			get
 			{
-				return this._lastname;
+				return this._city;
 			}
 			set
 			{
-				this._lastname = value;
+				this._city = value;
 			}
 		}
 		public virtual object Get(int fieldPos)
 		{
 			switch (fieldPos)
 			{
-			case 0: return this.firstname;
-			case 1: return this.lastname;
+			case 0: return this.street;
+			case 1: return this.city;
 			default: throw new AvroRuntimeException("Bad index " + fieldPos + " in Get()");
 			};
 		}
@@ -61,8 +61,8 @@ namespace de.partner
 		{
 			switch (fieldPos)
 			{
-			case 0: this.firstname = (System.String)fieldValue; break;
-			case 1: this.lastname = (System.String)fieldValue; break;
+			case 0: this.street = (System.String)fieldValue; break;
+			case 1: this.city = (System.String)fieldValue; break;
 			default: throw new AvroRuntimeException("Bad index " + fieldPos + " in Put()");
 			};
 		}

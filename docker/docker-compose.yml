@@ -17,7 +17,7 @@ services:
       - elasticsearch
   
   postgres:
-    build: docker/postgres-default-config/.
+    build: postgres-default-config/.
     image: postgres-default-config:1.0.0
     container_name: postgres
     ports:
@@ -38,7 +38,7 @@ services:
       - postgres
 
   kafka:
-    build: docker/fast-data-dev-with-connector/.
+    build: fast-data-dev-with-connector/.
     image: fast-data-dev-with-connector:1.0.0
     container_name: kafka
     ports:

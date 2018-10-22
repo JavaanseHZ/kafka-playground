@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using PartnerService.Models;
 using PartnerService.Producers;
+using System;
 
 namespace PartnerService.Controllers {
     [Route("api/[controller]")]
@@ -14,10 +15,6 @@ namespace PartnerService.Controllers {
         public PartnerController(PartnerContext context, IPartnerProducer partnerProducer) {
             this.partnerProducer = partnerProducer;
             _context = context;
-            if (_context.PartnerItems.Count() == 0) {
-                _context.PartnerItems.Add(new PartnerItem { firstname = "Franz", lastname = "Mayer" });
-                _context.SaveChanges();
-            }
         }
 
         [HttpGet]
@@ -26,7 +23,7 @@ namespace PartnerService.Controllers {
         }
 
         [HttpGet("{id}", Name = "GetPartner")]
-        public ActionResult<PartnerItem> GetById(long id) {
+        public ActionResult<PartnerItem> GetById(Guid id) {
             var item = _context.PartnerItems.Find(id);
             if (item == null) {
                 return NotFound();
@@ -45,7 +42,7 @@ namespace PartnerService.Controllers {
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(long id, PartnerItem partnerItem) {
+        public IActionResult Update(Guid id, PartnerItem partnerItem) {
             var item = _context.PartnerItems.Find(id);
             if (item == null) {
                 return NotFound();

@@ -1,0 +1,13 @@
+server:
+    port: 6000
+
+kafka:
+    bootstrap:
+        address: localhost:9092
+    schemaregistry:
+        address: http://localhost:8081
+    topic:
+        partner:
+            changed: PartnerChanged
+    group:
+        id: vertragGroup

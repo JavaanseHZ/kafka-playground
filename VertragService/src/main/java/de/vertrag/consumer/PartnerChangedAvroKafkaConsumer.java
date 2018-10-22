@@ -9,7 +9,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 
 import java.util.UUID;
 
-@KafkaListener(topics = "${kafka.topic.partner.changed}", containerFactory = "kafkaListenerContainerFactory")
+@KafkaListener(topics = "${kafka.topic.partner.changed}", containerFactory = "partnerChangedKafkaListenerContainerFactory")
 public class PartnerChangedAvroKafkaConsumer {
 
     @Autowired

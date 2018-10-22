@@ -54,7 +54,7 @@ public class PartnerChangedKafkaConsumerConfig {
 
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, PartnerChanged>
-    kafkaListenerContainerFactory() {
+    partnerChangedKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, PartnerChanged> factory
                 = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(partnerDeletedConsumerFactory());

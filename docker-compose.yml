@@ -16,3 +16,4 @@ services:
       - 9092:9092
     environment:
      - ADV_HOST=${HOSTNAME}
+     - SAMPLEDATA=0

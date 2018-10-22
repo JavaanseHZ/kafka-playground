@@ -6,8 +6,10 @@ kafka:
         address: localhost:9092
     schemaregistry:
         address: http://localhost:8081
-    topic:
-        partner:
-            changed: PartnerChanged
-    group:
-        id: vertragGroup
+    consumer:
+        topic:
+            partner:
+                changed: PartnerChanged
+        group:
+            id: vertragGroup
+        offset: earliest

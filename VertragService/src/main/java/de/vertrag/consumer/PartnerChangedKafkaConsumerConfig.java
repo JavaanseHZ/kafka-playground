@@ -5,6 +5,7 @@ import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient;
 import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
+import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,33 +24,48 @@ public class PartnerChangedKafkaConsumerConfig {
     @Value(value = "${kafka.bootstrap.address}")
     private String bootstrapAddress;
 
-    @Value(value = "${kafka.group.id}")
-    private String groupId;
-
     @Value(value = "${kafka.schemaregistry.address}")
     private String registryAddress;
 
+    @Value(value = "${kafka.consumer.group.id}")
+    private String groupId;
+
+    @Value(value = "${kafka.consumer.offset}")
+    private String offset;
+
     @Bean
-    public ConsumerFactory<String, PartnerChanged> partnerDeletedConsumerFactory() {
-        Map<String, Object> props = new HashMap<>();
-        props.put(
+    public ConsumerFactory<String, PartnerChanged> partnerChangedConsumerFactory() {
+        Map<String, Object> consumerFactoryProps = new HashMap<>();
+        consumerFactoryProps.put(
                 ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
                 bootstrapAddress);
-        props.put(
+        consumerFactoryProps.put(
                 ConsumerConfig.GROUP_ID_CONFIG,
                 groupId);
-        props.put(
+        consumerFactoryProps.put(
                 ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
                 StringDeserializer.class);
-        props.put(
+        consumerFactoryProps.put(
                 ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
                 KafkaAvroDeserializer.class);
-        props.put(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, registryAddress);
+        consumerFactoryProps.put(
+                ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,
+                offset);
+        consumerFactoryProps.put(
+                AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG,
+                registryAddress);
 
         SchemaRegistryClient client = new CachedSchemaRegistryClient(registryAddress, 10);
 
-        return new DefaultKafkaConsumerFactory(props, new StringDeserializer(),
-                new KafkaAvroDeserializer(client));
+        Map<String, Object> deserializerProps = new HashMap<>();
+        deserializerProps.put(
+                KafkaAvroDeserializerConfig.SPECIFIC_AVRO_READER_CONFIG,
+                true);
+        deserializerProps.put(
+                AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG,
+                registryAddress);
+        return new DefaultKafkaConsumerFactory(consumerFactoryProps, new StringDeserializer(),
+                new KafkaAvroDeserializer(client, deserializerProps));
     }
 
     @Bean
@@ -57,7 +73,7 @@ public class PartnerChangedKafkaConsumerConfig {
     partnerChangedKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, PartnerChanged> factory
                 = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(partnerDeletedConsumerFactory());
+        factory.setConsumerFactory(partnerChangedConsumerFactory());
         return factory;
     }
 

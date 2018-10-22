@@ -6,10 +6,12 @@ import de.vertrag.repository.VertragRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
-@KafkaListener(topics = "${kafka.topic.partner.changed}", containerFactory = "partnerChangedKafkaListenerContainerFactory")
+@Service
+@KafkaListener(topics = "${kafka.consumer.topic.partner.changed}", containerFactory = "partnerChangedKafkaListenerContainerFactory")
 public class PartnerChangedAvroKafkaConsumer {
 
     @Autowired

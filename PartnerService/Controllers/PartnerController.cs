@@ -3,28 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using PartnerService.Models;
 using PartnerService.Producers;
+using PartnerService.Consumers;
 using System;
 
 namespace PartnerService.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class PartnerController : ControllerBase {
-        private readonly PartnerContext _context;
+        private readonly PartnerContext context;
         private IPartnerProducer partnerProducer;
 
         public PartnerController(PartnerContext context, IPartnerProducer partnerProducer) {
             this.partnerProducer = partnerProducer;
-            _context = context;
+            this.context = context;
         }
 
         [HttpGet]
         public ActionResult<List<PartnerItem>> GetAll() {
-            return _context.PartnerItems.ToList();
+            return context.PartnerItems.ToList();
         }
 
         [HttpGet("{id}", Name = "GetPartner")]
         public ActionResult<PartnerItem> GetById(Guid id) {
-            var item = _context.PartnerItems.Find(id);
+            var item = context.PartnerItems.Find(id);
             if (item == null) {
                 return NotFound();
             }
@@ -33,34 +34,19 @@ namespace PartnerService.Controllers {
 
         [HttpPost]
         public IActionResult Create(PartnerItem partnerItem) {
-            _context.PartnerItems.Add(partnerItem);
-            _context.SaveChanges();
-
+            partnerItem.id = Guid.NewGuid();
             partnerProducer.sendPartnerCreated(partnerItem);
-
             return CreatedAtRoute("GetPartner", new { id = partnerItem.id }, partnerItem);
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(Guid id, PartnerItem partnerItem) {
-            var item = _context.PartnerItems.Find(id);
+            var item = context.PartnerItems.Find(id);
             if (item == null) {
                 return NotFound();
             }
-
-            item.firstname = partnerItem.firstname;
-            item.lastname = partnerItem.lastname;
-            item.street = partnerItem.street;
-            item.city = partnerItem.city;
-
-            _context.PartnerItems.Update(item);
-            _context.SaveChanges();
-            
             partnerProducer.sendPartnerChanged(item);
-            
             return NoContent();
         }
-     
-
     }
 }

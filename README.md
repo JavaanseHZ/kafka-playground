@@ -32,11 +32,13 @@ export HOSTNAME=${HOSTNAME}
   "value.converter": "io.confluent.connect.avro.AvroConverter",
   "key.converter.schema.registry.url":"http://localhost:8081",
   "value.converter.schema.registry.url":"http://localhost:8081",
-  "transforms":"createKey,extractInt",
+  "transforms":"createKey,extractInt,SetSchemaName",
   "transforms.createKey.type":"org.apache.kafka.connect.transforms.ValueToKey",
   "transforms.createKey.fields":"id",
   "transforms.extractInt.type":"org.apache.kafka.connect.transforms.ExtractField$Key",
-  "transforms.extractInt.field":"id"
+  "transforms.extractInt.field":"id",
+  "transforms.SetSchemaName.type":"org.apache.kafka.connect.transforms.SetSchemaMetadata$Value",
+  "transforms.SetSchemaName.schema.name":"de.partner.dubletten.PartnerdublettenFound"
 }
 ```
 

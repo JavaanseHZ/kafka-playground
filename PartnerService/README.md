@@ -10,3 +10,8 @@ Simple C#/ASP.net Core REST application using Kafka
 - [.NET Core](https://www.microsoft.com/net/learn/dotnet/hello-world-tutorial)
 - [Confluent Kafka .NET Client](https://github.com/confluentinc/confluent-kafka-dotnet)
 - [Docker build](https://hub.docker.com/r/microsoft/aspnetcore/)
+
+## Build Docker Image
+```
+docker build -t partner-service:latest .
+```

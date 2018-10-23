@@ -15,15 +15,16 @@ services:
      - "1358:1358"
     links:
       - elasticsearch
-  
+
   postgres:
-    build: postgres-default-config/.
-    image: postgres-default-config:1.0.0
+    image: postgres:11.0-alpine
     container_name: postgres
     ports:
       - 5432:5432
     environment:
       POSTGRES_PASSWORD: example
+    volumes:
+      - ./postgres-default-config/postgresql.conf:/usr/local/share/postgresql/postgresql.conf
 
   adminer:
     image: adminer:4.6.3
@@ -38,8 +39,7 @@ services:
       - postgres
 
   kafka:
-    build: fast-data-dev-with-connector/.
-    image: fast-data-dev-with-connector:1.0.0
+    image: landoop/fast-data-dev:2.0.0
     container_name: kafka
     ports:
       - 2181:2181

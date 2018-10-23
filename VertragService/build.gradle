@@ -6,24 +6,22 @@ buildscript {
     dependencies {
         classpath('org.springframework.boot:spring-boot-gradle-plugin:2.0.4.RELEASE')
         classpath('com.commercehub.gradle.plugin:gradle-avro-plugin:0.14.1')
+        classpath('com.bmuschko:gradle-docker-plugin:3.6.2')
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'application'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'com.commercehub.gradle.plugin.avro'
-
-bootJar {
-    baseName = 'vertrag-service'
-    version = '1.0.0'
-}
+apply plugin: 'com.bmuschko.docker-java-application'
 
 repositories {
     mavenCentral()
     jcenter()
-    maven{ url = "http://packages.confluent.io/maven/"}
+    maven{ url = 'http://packages.confluent.io/maven/' }
 }
 
 sourceCompatibility = 1.8
@@ -39,6 +37,20 @@ dependencies {
 }
 
 task generateAvro(type: com.commercehub.gradle.plugin.avro.GenerateAvroJavaTask) {
-    source("src/main/avro")
-    outputDir = file("src/main/avro")
+    source('src/main/avro')
+    outputDir = file('src/main/avro')
+}
+
+mainClassName = 'de.vertrag.VertragSpringApplication'
+
+docker {
+    javaApplication {
+        baseImage = 'openjdk:8-alpine'
+        tag = 'vertrag-service:latest'
+        ports = [9000, 6000]
+    }
+}
+
+dockerDistTar {
+    environmentVariable 'JAVA_OPTS', '-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap'
 }

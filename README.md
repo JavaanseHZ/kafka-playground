@@ -23,7 +23,7 @@ export HOSTNAME=${HOSTNAME}
   "mode": "timestamp+incrementing",
   "incrementing.column.name": "id",
   "timestamp.column.name": "ts",
-  "topic.prefix": "PartnerdublettenFound",
+  "topic.prefix": "partnerdublettenFound",
   "tasks.max": "1",
   "connection.url": "jdbc:postgresql://postgres:5432/postgres?user=postgres&password=example",
   "poll.interval.ms": 1000,

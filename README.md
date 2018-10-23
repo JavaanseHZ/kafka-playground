@@ -12,30 +12,6 @@ export HOSTNAME=${HOSTNAME}
 [dejavu (elastic)](http://localhost:1358)
 
 ## PartnerDubletten
-###Table for Partnerdubletten in PostgreSQL
-1. Login in [Adminer](http://localhost:18080)
-```
-System:	PostgreSQL
-Server: postgres
-Username:	postgres
-Password:	example
-Database: postgres
-```
-2. Create Table partnerdubletten
-```sql
-CREATE TABLE partnerdubletten (
-  id SERIAL NOT NULL PRIMARY KEY,
-  ts timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE 'CEST'),
-  oldPartnerId TEXT,
-  newPartnerId TEXT
-);
-```
-3. Create Kafka Connect JdbcSourceConnector for PartnerDubletten
-4. Insert PartnerDubletten Data (replace OLD-UUID and NEW-UUID with real values):
-```sql
-INSERT INTO "partnerdubletten" ("oldpartnerid", "newpartnerid")
-VALUES ('[OLD-UUID]', '[NEW-UUID]');
-```
 
 ###Kafka Connect JdbcSourceConnector Configuration for PartnerDubletten
 1. Open [kafka-topic-connect-ui](http://localhost:3030/kafka-connect-ui/#/cluster/fast-data-dev)
@@ -56,11 +32,26 @@ VALUES ('[OLD-UUID]', '[NEW-UUID]');
   "key.converter": "io.confluent.connect.avro.AvroConverter",
   "value.converter": "io.confluent.connect.avro.AvroConverter",
   "key.converter.schema.registry.url":"http://localhost:8081",
-  "value.converter.schema.registry.url":"http://localhost:8081"
+  "value.converter.schema.registry.url":"http://localhost:8081",
   "transforms":"createKey,extractInt",
   "transforms.createKey.type":"org.apache.kafka.connect.transforms.ValueToKey",
   "transforms.createKey.fields":"id",
   "transforms.extractInt.type":"org.apache.kafka.connect.transforms.ExtractField$Key",
   "transforms.extractInt.field":"id"
 }
+```
+
+###Insert Partnerdubletten in PostgreSQL
+1. Login in [Adminer](http://localhost:18080)
+```
+System:	PostgreSQL
+Server: postgres
+Username:	postgres
+Password:	example
+Database: postgres
+```
+2. Insert PartnerDubletten Data (replace OLD-UUID and NEW-UUID with real values):
+```sql
+INSERT INTO "partnerdubletten" ("oldpartnerid", "newpartnerid")
+VALUES ('[OLD-UUID]', '[NEW-UUID]');
 ```

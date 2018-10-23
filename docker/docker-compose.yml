@@ -25,6 +25,7 @@ services:
       POSTGRES_PASSWORD: example
     volumes:
       - ./postgres-default-config/postgresql.conf:/usr/local/share/postgresql/postgresql.conf
+      - ./postgres-default-config/CreateDB.sql:/docker-entrypoint-initdb.d/CreateDB.sql
 
   adminer:
     image: adminer:4.6.3

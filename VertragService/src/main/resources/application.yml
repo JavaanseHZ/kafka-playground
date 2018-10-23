@@ -13,3 +13,7 @@ kafka:
         group:
             id: vertragGroup
         offset: earliest
+    producer:
+        topic:
+           vertrag:
+              created: VertragCreated

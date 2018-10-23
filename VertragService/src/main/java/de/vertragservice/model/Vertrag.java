@@ -1,4 +1,4 @@
-package de.vertrag.model;
+package de.vertragservice.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

@@ -37,7 +37,7 @@ dependencies {
 }
 
 task generateAvro(type: com.commercehub.gradle.plugin.avro.GenerateAvroJavaTask) {
-    source('src/main/avro')
+    source('src/avro/schema')
     outputDir = file('src/main/avro')
 }
 

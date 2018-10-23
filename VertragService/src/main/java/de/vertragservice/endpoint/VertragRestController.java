@@ -1,7 +1,8 @@
-package de.vertrag.endpoint;
+package de.vertragservice.endpoint;
 
-import de.vertrag.model.Vertrag;
-import de.vertrag.repository.VertragRepository;
+import de.vertragservice.messaging.producer.VertragCreatedProducer;
+import de.vertragservice.model.Vertrag;
+import de.vertragservice.repository.VertragRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +16,12 @@ import java.util.UUID;
 public class VertragRestController {
 
     private final VertragRepository vertragRepository;
+    private final VertragCreatedProducer vertragCreatedProducer;
 
     @Autowired
-    VertragRestController(VertragRepository vertragRepository) {
+    VertragRestController(VertragRepository vertragRepository, VertragCreatedProducer vertragCreatedProducer) {
         this.vertragRepository = vertragRepository;
+        this.vertragCreatedProducer = vertragCreatedProducer;
     }
 
     @GetMapping
@@ -42,6 +45,7 @@ public class VertragRestController {
         if(vertrag.getId() == null && vertrag.getPartner().getId() != null) {
             vertrag.setId(UUID.randomUUID());
             Vertrag savedVertrag = vertragRepository.save(vertrag);
+            vertragCreatedProducer.sendEvent(vertrag.getId().toString(), vertrag);
             return new ResponseEntity<>(savedVertrag, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

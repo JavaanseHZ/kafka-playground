@@ -1,14 +1,9 @@
-package de.vertrag.consumer;
+package de.vertragservice.messaging.consumer;
 
 import de.partner.changed.PartnerChanged;
-import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient;
-import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
-import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.common.serialization.StringDeserializer;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
@@ -19,22 +14,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class PartnerChangedKafkaConsumerConfig {
+public class PartnerChangedConsumerConfiguration extends ConsumerConfiguration{
 
-    @Value(value = "${kafka.bootstrap.address}")
-    private String bootstrapAddress;
-
-    @Value(value = "${kafka.schemaregistry.address}")
-    private String registryAddress;
-
-    @Value(value = "${kafka.consumer.group.id}")
-    private String groupId;
-
-    @Value(value = "${kafka.consumer.offset}")
-    private String offset;
-
-    @Bean
-    public ConsumerFactory<String, PartnerChanged> partnerChangedConsumerFactory() {
+    private ConsumerFactory<String, PartnerChanged> partnerChangedConsumerFactory() {
         Map<String, Object> consumerFactoryProps = new HashMap<>();
         consumerFactoryProps.put(
                 ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
@@ -44,7 +26,7 @@ public class PartnerChangedKafkaConsumerConfig {
                 groupId);
         consumerFactoryProps.put(
                 ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
-                StringDeserializer.class);
+                KafkaAvroDeserializer.class);
         consumerFactoryProps.put(
                 ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
                 KafkaAvroDeserializer.class);
@@ -55,18 +37,10 @@ public class PartnerChangedKafkaConsumerConfig {
                 AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG,
                 registryAddress);
 
-        SchemaRegistryClient client = new CachedSchemaRegistryClient(registryAddress, 10);
-
-        Map<String, Object> deserializerProps = new HashMap<>();
-        deserializerProps.put(
-                KafkaAvroDeserializerConfig.SPECIFIC_AVRO_READER_CONFIG,
-                true);
-        deserializerProps.put(
-                AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG,
-                registryAddress);
-        return new DefaultKafkaConsumerFactory(consumerFactoryProps, new StringDeserializer(),
-                new KafkaAvroDeserializer(client, deserializerProps));
+        return new DefaultKafkaConsumerFactory(consumerFactoryProps, new KafkaAvroDeserializer(schemaRegistryClient, avroDeserializerProps()),
+                new KafkaAvroDeserializer(schemaRegistryClient, avroDeserializerProps()));
     }
+
 
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, PartnerChanged>
@@ -76,5 +50,4 @@ public class PartnerChangedKafkaConsumerConfig {
         factory.setConsumerFactory(partnerChangedConsumerFactory());
         return factory;
     }
-
 }

@@ -1,6 +1,6 @@
-package de.vertrag.repository;
+package de.vertragservice.repository;
 
-import de.vertrag.model.Vertrag;
+import de.vertragservice.model.Vertrag;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

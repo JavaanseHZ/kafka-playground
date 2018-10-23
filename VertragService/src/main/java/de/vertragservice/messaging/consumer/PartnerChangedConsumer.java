@@ -1,8 +1,8 @@
-package de.vertrag.consumer;
+package de.vertragservice.messaging.consumer;
 
 
 import de.partner.changed.PartnerChanged;
-import de.vertrag.repository.VertragRepository;
+import de.vertragservice.repository.VertragRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Service
 @KafkaListener(topics = "${kafka.consumer.topic.partner.changed}", containerFactory = "partnerChangedKafkaListenerContainerFactory")
-public class PartnerChangedAvroKafkaConsumer {
+public class PartnerChangedConsumer {
 
     @Autowired
     private VertragRepository vertragRepository;

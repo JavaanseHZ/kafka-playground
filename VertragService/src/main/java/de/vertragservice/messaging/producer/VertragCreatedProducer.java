@@ -1,6 +1,5 @@
 package de.vertragservice.messaging.producer;
 
-import de.vertrag.created.Name;
 import de.vertrag.created.Partner;
 import de.vertrag.created.VertragCreated;
 import de.vertragservice.model.Vertrag;

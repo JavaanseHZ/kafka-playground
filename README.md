@@ -13,10 +13,9 @@ export HOSTNAME=${HOSTNAME}
 
 ## PartnerDubletten
 
-###Kafka Connect JdbcSourceConnector Configuration for PartnerDubletten
-1. Open [kafka-topic-connect-ui](http://localhost:3030/kafka-connect-ui/#/cluster/fast-data-dev)
-2. Create new JDBC Source Connector
-3. Use the follwing Json Configuration
+### Kafka Connect JdbcSourceConnector Configuration for PartnerDubletten
+1. Create new JDBC Source Connector [kafka-topic-connect-ui](http://localhost:3030/kafka-connect-ui/#/cluster/fast-data-dev/create-connector/io.confluent.connect.jdbc.JdbcSourceConnector)
+2. Use the follwing Json Configuration
 ```json
 {
   "name": "source-partnerdubletten",
@@ -41,7 +40,7 @@ export HOSTNAME=${HOSTNAME}
 }
 ```
 
-###Insert Partnerdubletten in PostgreSQL
+### Insert Partnerdubletten in PostgreSQL
 1. Login in [Adminer](http://localhost:18080)
 ```
 System:	PostgreSQL
@@ -54,4 +53,25 @@ Database: postgres
 ```sql
 INSERT INTO "partnerdubletten" ("oldpartnerid", "newpartnerid")
 VALUES ('[OLD-UUID]', '[NEW-UUID]');
+```
+
+## Kafka Connect ElasticSinkConnector Configuration for VertragCreated
+1. Create new Elastic Sink Connector [kafka-topic-connect-ui](http://localhost:3030/kafka-connect-ui/#/cluster/fast-data-dev/create-connector/io.confluent.connect.elasticsearch.ElasticsearchSinkConnector)
+2. Use the follwing Json Configuration
+```json
+{
+  "name": "VertragCreatedElasticSinkConnector",
+  "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
+  "type.name": "vertrag",
+  "topics": "VertragCreated",
+  "tasks.max": "1",
+  "topic.index.map": "VertragCreated:vertrag_created",
+  "connection.url": "http://elasticsearch:9200",
+  "key.ignore": "true",
+  "schema.ignore": "true",
+  "key.converter": "io.confluent.connect.avro.AvroConverter",
+  "value.converter": "io.confluent.connect.avro.AvroConverter",
+  "key.converter.schema.registry.url":"http://localhost:8081",
+  "value.converter.schema.registry.url":"http://localhost:8081"
+}
 ```

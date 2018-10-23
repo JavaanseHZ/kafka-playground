@@ -3,16 +3,25 @@ services:
   elasticsearch:
     image: elasticsearch:5.6.12-alpine
     container_name: elasticsearch
-    command: elasticsearch -Ecluster.name=catalog -Ebootstrap.memory_lock=true -Ehttp.port=9200 -Ehttp.cors.allow-origin="http://localhost:1358" -Ehttp.cors.enabled=true -Ehttp.cors.allow-headers=X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization -Ehttp.cors.allow-credentials=true
+    command: elasticsearch
     environment:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - cluster.name=playground
+      - bootstrap.memory_lock=true
+      - http.port=9200
+      - http.cors.allow-origin="*"
+      - http.cors.enabled=true
+      - http.cors.allow-headers=X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization
+      - http.cors.allow-credentials=true
     ports:
      - "9200:9200"
-  dejavu:
-    image: appbaseio/dejavu:2.0.5
-    container_name: dejavu
+     - "9300:9300"
+
+  kibana:
+    image: kibana:5.6.12
+    container_name: kibana
     ports:
-     - "1358:1358"
+      - "5601:5601"
     links:
       - elasticsearch
 
@@ -50,3 +59,6 @@ services:
     environment:
      - ADV_HOST=${HOSTNAME}
      - SAMPLEDATA=0
+     - RUNTESTS=0
+    links:
+      - elasticsearch

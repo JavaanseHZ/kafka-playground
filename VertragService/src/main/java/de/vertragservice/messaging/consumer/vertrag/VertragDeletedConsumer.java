@@ -1,7 +1,6 @@
 package de.vertragservice.messaging.consumer.vertrag;
 
 import de.vertrag.kafkaevent.deleted.VertragDeleted;
-import de.vertragservice.model.Vertrag;
 import de.vertragservice.repository.VertragRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaHandler;

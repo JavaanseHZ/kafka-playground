@@ -4,10 +4,12 @@ import de.vertrag.kafkaevent.deleted.VertragDeleted;
 import de.vertragservice.messaging.consumer.ConsumerConfiguration;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 
+@Configuration
 public class VertragDeletedConsumerConfiguration extends ConsumerConfiguration {
 
     private ConsumerFactory<String, VertragDeleted> vertragDeletedConsumerFactory() {

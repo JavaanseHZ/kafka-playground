@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class DeleteVertragProducer {
 
-    @Value("${kafka.producer.topic.delete.vertrag}")
+    @Value("${kafka.producer.topic.vertrag.delete}")
     private String topic;
 
     @Autowired

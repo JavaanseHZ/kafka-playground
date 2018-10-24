@@ -10,22 +10,17 @@ kafka:
         topic:
             partner:
                 changed: PartnerChanged
-            partner:
                 deleted: PartnerDeleted
             vertrag:
                 created: VertragCreated
-            vertrag:
                 changed: VertragChanged
-            vertrag:
                 deleted: VertragDeleted
         group:
             id: vertragGroup
         offset: earliest
     producer:
         topic:
-           create:
-              vertrag: CreateVertrag
-           change:
-              vertrag: ChangeVertrag
-           delete:
-              vertrag: DeleteVertrag
+            vertrag:
+                create: CreateVertrag
+                change: ChangeVertrag
+                delete: DeleteVertrag

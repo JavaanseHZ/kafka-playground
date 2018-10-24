@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/vertrag")
+@RequestMapping("/api/vertrag")
 public class VertragRestController {
 
     private final VertragRepository vertragRepository;

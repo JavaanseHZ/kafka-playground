@@ -34,11 +34,7 @@ dependencies {
     compile('org.springframework.kafka:spring-kafka')
     compile('org.apache.avro:avro:1.8.2')
     compile('io.confluent:kafka-avro-serializer:5.0.0')
-}
-
-task generateAvro(type: com.commercehub.gradle.plugin.avro.GenerateAvroJavaTask) {
-    source('src/avro/schema')
-    outputDir = file('src/main/avro')
+    compile('joda-time:joda-time:2.10')
 }
 
 mainClassName = 'de.vertrag.VertragSpringApplication'

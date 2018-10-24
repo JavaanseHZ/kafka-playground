@@ -1,7 +1,8 @@
-package de.vertragservice.messaging.consumer;
+package de.vertragservice.messaging.consumer.partner;
 
 
-import de.partner.changed.PartnerChanged;
+
+import de.partner.kafkaevent.changed.PartnerChanged;
 import de.vertragservice.repository.VertragRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaHandler;

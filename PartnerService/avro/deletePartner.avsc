@@ -1,0 +1,8 @@
+{
+  "namespace": "de.partner.kafkacommand.delete",
+  "type": "record",
+  "name": "DeletePartner",
+  "fields": [
+    { "name": "id", "type": "string" }
+  ]
+}

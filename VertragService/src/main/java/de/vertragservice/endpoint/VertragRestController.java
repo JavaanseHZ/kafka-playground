@@ -1,6 +1,7 @@
 package de.vertragservice.endpoint;
 
-import de.vertragservice.messaging.producer.VertragCreatedProducer;
+import de.vertragservice.messaging.producer.ChangeVertragProducer;
+import de.vertragservice.messaging.producer.CreateVertragProducer;
 import de.vertragservice.model.Vertrag;
 import de.vertragservice.repository.VertragRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,16 @@ import java.util.UUID;
 public class VertragRestController {
 
     private final VertragRepository vertragRepository;
-    private final VertragCreatedProducer vertragCreatedProducer;
+    private final CreateVertragProducer createVertragProducer;
+    private final ChangeVertragProducer changeVertragProducer;
 
     @Autowired
-    VertragRestController(VertragRepository vertragRepository, VertragCreatedProducer vertragCreatedProducer) {
+    VertragRestController(VertragRepository vertragRepository,
+                          CreateVertragProducer createVertragProducer,
+                          ChangeVertragProducer changeVertragProducer) {
         this.vertragRepository = vertragRepository;
-        this.vertragCreatedProducer = vertragCreatedProducer;
+        this.createVertragProducer = createVertragProducer;
+        this.changeVertragProducer = changeVertragProducer;
     }
 
     @GetMapping
@@ -44,25 +49,19 @@ public class VertragRestController {
     public ResponseEntity<Vertrag> create(@RequestBody Vertrag vertrag) {
         if(vertrag.getId() == null && vertrag.getPartner().getId() != null) {
             vertrag.setId(UUID.randomUUID());
-            Vertrag savedVertrag = vertragRepository.save(vertrag);
-            vertragCreatedProducer.sendEvent(vertrag.getId().toString(), vertrag);
-            return new ResponseEntity<>(savedVertrag, HttpStatus.OK);
+            createVertragProducer.sendEvent(vertrag.getId().toString(), vertrag);
+            return new ResponseEntity<>(vertrag, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity update(@PathVariable String id, @RequestBody Vertrag vertrag) {
-        if(vertrag.getId() != null && vertrag.getPartner().getId() != null) {
-            return vertragRepository.findById(UUID.fromString(id))
-                .map(savedVertrag -> {
-                    savedVertrag.setPartner(vertrag.getPartner());
-                    savedVertrag.setBeitrag(vertrag.getBeitrag());
-                    savedVertrag.setSparte(vertrag.getSparte());
-                    vertragRepository.save(savedVertrag);
-                    return new ResponseEntity(HttpStatus.OK);
-                })
-                .orElse(new ResponseEntity(HttpStatus.BAD_REQUEST));
+        if(vertrag.getId() != null &&
+           vertrag.getPartner().getId() != null &&
+           vertragRepository.findById(UUID.fromString(id)).isPresent()) {
+                createVertragProducer.sendEvent(id, vertrag);
+                return new ResponseEntity(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }

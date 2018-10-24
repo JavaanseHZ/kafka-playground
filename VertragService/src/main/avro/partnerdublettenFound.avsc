@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "PartnerdublettenFound",
-  "namespace": "de.partner.dubletten",
+  "namespace": "de.partner.kafkaevent.dubletten",
   "fields": [
     {
       "name": "id",

@@ -1,7 +1,7 @@
 {
-  "namespace": "de.vertrag.kafkaevent.created",
+  "namespace": "de.vertrag.kafkacommand.create",
   "type": "record",
-  "name": "VertragCreated",
+  "name": "CreateVertrag",
   "fields": [
     { "name": "id", "type": "string" },
     {

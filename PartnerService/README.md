@@ -15,3 +15,9 @@ Simple C#/ASP.net Core REST application using Kafka
 ```
 docker build -t partner-service:latest .
 ```
+
+## Generate Classes from Avro Schema
+Execute in terminal
+```
+PartnerService/avro$ avrogen -s createPartner.avsc ..
+```

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using PartnerService.Models;
 using PartnerService.Producers;
-using PartnerService.Consumers;
+using PartnerService.Producers.Partner;
 using System;
 
 namespace PartnerService.Controllers {
@@ -11,10 +11,17 @@ namespace PartnerService.Controllers {
     [ApiController]
     public class PartnerController : ControllerBase {
         private readonly PartnerContext context;
-        private IPartnerProducer partnerProducer;
+        private CreatePartnerProducer createPartnerProducer;
+        private ChangePartnerProducer changePartnerProducer;
+        private DeletePartnerProducer deletePartnerProducer;
 
-        public PartnerController(PartnerContext context, IPartnerProducer partnerProducer) {
-            this.partnerProducer = partnerProducer;
+        public PartnerController(PartnerContext context,
+                CreatePartnerProducer createPartnerProducer,
+                ChangePartnerProducer changePartnerProducer,
+                DeletePartnerProducer deletePartnerProducer) {
+            this.createPartnerProducer = createPartnerProducer;
+            this.changePartnerProducer = changePartnerProducer;
+            this.deletePartnerProducer = deletePartnerProducer;
             this.context = context;
         }
 
@@ -35,7 +42,7 @@ namespace PartnerService.Controllers {
         [HttpPost]
         public IActionResult Create(PartnerItem partnerItem) {
             partnerItem.id = Guid.NewGuid();
-            partnerProducer.sendCreatePartner(partnerItem);
+            createPartnerProducer.sendEvent(partnerItem);
             return CreatedAtRoute("GetPartner", new { id = partnerItem.id }, partnerItem);
         }
 
@@ -45,7 +52,18 @@ namespace PartnerService.Controllers {
             if (item == null) {
                 return NotFound();
             }
-            partnerProducer.sendChangePartner(item);
+            changePartnerProducer.sendEvent(item);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            var item = context.PartnerItems.Find(id);
+            if (item == null) {
+                return NotFound();
+            }
+            deletePartnerProducer.sendEvent(item);
             return NoContent();
         }
     }

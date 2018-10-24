@@ -38,7 +38,7 @@ export HOSTNAME=${HOSTNAME}
   "transforms.extractInt.type":"org.apache.kafka.connect.transforms.ExtractField$Key",
   "transforms.extractInt.field":"id",
   "transforms.SetSchemaName.type":"org.apache.kafka.connect.transforms.SetSchemaMetadata$Value",
-  "transforms.SetSchemaName.schema.name":"de.partner.dubletten.PartnerdublettenFound"
+  "transforms.SetSchemaName.schema.name":"de.partner.kafkaevent.dubletten.PartnerdublettenFound"
 }
 ```
 

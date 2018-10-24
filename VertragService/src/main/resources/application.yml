@@ -11,6 +11,7 @@ kafka:
             partner:
                 changed: PartnerChanged
                 deleted: PartnerDeleted
+                dublettenfound: PartnerdublettenFound
         group:
             id: vertragGroup
         offset: earliest

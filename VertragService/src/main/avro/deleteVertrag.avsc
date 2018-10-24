@@ -1,8 +1,0 @@
-{
-  "namespace": "de.vertrag.kafkacommand.delete",
-  "type": "record",
-  "name": "DeleteVertrag",
-  "fields": [
-    { "name": "id", "type": "string" }
-  ]
-}

@@ -2,33 +2,33 @@ using System;
 using Confluent.Kafka;
 using PartnerService.Models;
 using Confluent.Kafka.Serialization;
-using de.partner.kafkacommand.create;
+using de.partner.kafkaevent.created;
 
 namespace PartnerService.Producers.Partner {
-    public class CreatePartnerProducer {
-        private  Producer<String, CreatePartner> producerCreated;
+    public class PartnerCreatedProducer {
+        private  Producer<String, PartnerCreated> producerCreated;
         private ProducerConfiguration producerConfiguration;
 
-        public CreatePartnerProducer(ProducerConfiguration producerConfiguration) {
+        public PartnerCreatedProducer(ProducerConfiguration producerConfiguration) {
             this.producerConfiguration = producerConfiguration;
             AvroSerdeProvider serdeProvider = new AvroSerdeProvider(producerConfiguration.avroConfig);
-            producerCreated = new Producer<String, CreatePartner>(
+            producerCreated = new Producer<String, PartnerCreated>(
                 producerConfiguration.producerConfig,
                 serdeProvider.GetSerializerGenerator<String>(),
-                serdeProvider.GetSerializerGenerator<CreatePartner>());
+                serdeProvider.GetSerializerGenerator<PartnerCreated>());
         }
 
         public void sendEvent(PartnerItem partnerItem) {
-            Action<DeliveryReportResult<String, CreatePartner>> handler = r => 
+            Action<DeliveryReportResult<String, PartnerCreated>> handler = r => 
                 Console.WriteLine(!r.Error.IsError
                     ? $"Delivered message to {r.TopicPartitionOffset}"
                     : $"Delivery Error: {r.Error.Reason}");
                
                 var partnerName = new Name {firstname = partnerItem.firstname, lastname = partnerItem.lastname};
                 var partnerAddress = new Address {street = partnerItem.street, city = partnerItem.city};
-                var CreatePartner = new CreatePartner{id = partnerItem.id.ToString(), Name = partnerName, Address = partnerAddress};
+                var partnerCreated = new PartnerCreated{id = partnerItem.id.ToString(), Name = partnerName, Address = partnerAddress};
                 producerCreated
-                        .ProduceAsync("CreatePartner", new Message<String, CreatePartner> { Key = partnerItem.id.ToString(), Value = CreatePartner})
+                        .ProduceAsync("PartnerCreated", new Message<String, PartnerCreated> { Key = partnerItem.id.ToString(), Value = partnerCreated})
                         .ContinueWith(task => task.IsFaulted
                             ? $"error producing message: {task.Exception.Message}"
                             : $"produced to: {task.Result.TopicPartitionOffset}");

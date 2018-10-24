@@ -5,7 +5,7 @@
 //    is regenerated
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace de.partner.changed
+namespace de.partner.kafkaevent.created
 {
 	using System;
 	using System.Collections.Generic;
@@ -15,8 +15,8 @@ namespace de.partner.changed
 	
 	public partial class Name : ISpecificRecord
 	{
-		public static Schema _SCHEMA = Schema.Parse("{\"type\":\"record\",\"name\":\"Name\",\"namespace\":\"de.partner.changed\",\"fields\":[{\"name\"" +
-				":\"firstname\",\"type\":\"string\"},{\"name\":\"lastname\",\"type\":\"string\"}]}");
+		public static Schema _SCHEMA = Schema.Parse("{\"type\":\"record\",\"name\":\"Name\",\"namespace\":\"de.partner.kafkaevent.created\",\"field" +
+				"s\":[{\"name\":\"firstname\",\"type\":\"string\"},{\"name\":\"lastname\",\"type\":\"string\"}]}");
 		private string _firstname;
 		private string _lastname;
 		public virtual Schema Schema

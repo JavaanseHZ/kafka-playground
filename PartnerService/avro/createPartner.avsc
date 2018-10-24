@@ -1,7 +1,7 @@
 {
-  "namespace": "de.partner.kafkaevent.created",
+  "namespace": "de.partner.kafkacommand.create",
   "type": "record",
-  "name": "PartnerCreated",
+  "name": "CreatePartner",
   "fields": [
     { "name": "id", "type": "string" },
     { "name": "Name",

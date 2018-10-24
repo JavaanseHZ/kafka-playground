@@ -5,7 +5,7 @@
 //    is regenerated
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace de.partner.changed
+namespace de.partner.kafkacommand.change
 {
 	using System;
 	using System.Collections.Generic;
@@ -15,8 +15,8 @@ namespace de.partner.changed
 	
 	public partial class Address : ISpecificRecord
 	{
-		public static Schema _SCHEMA = Schema.Parse("{\"type\":\"record\",\"name\":\"Address\",\"namespace\":\"de.partner.changed\",\"fields\":[{\"na" +
-				"me\":\"street\",\"type\":\"string\"},{\"name\":\"city\",\"type\":\"string\"}]}");
+		public static Schema _SCHEMA = Schema.Parse("{\"type\":\"record\",\"name\":\"Address\",\"namespace\":\"de.partner.kafkacommand.change\",\"f" +
+				"ields\":[{\"name\":\"street\",\"type\":\"string\"},{\"name\":\"city\",\"type\":\"string\"}]}");
 		private string _street;
 		private string _city;
 		public virtual Schema Schema

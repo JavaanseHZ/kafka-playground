@@ -1,5 +1,5 @@
 {
-  "namespace": "de.partner.changed",
+  "namespace": "de.partner.kafkaevent.changed",
   "type": "record",
   "name": "PartnerChanged",
   "fields": [

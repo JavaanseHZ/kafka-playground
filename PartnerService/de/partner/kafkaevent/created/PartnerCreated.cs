@@ -5,7 +5,7 @@
 //    is regenerated
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace de.partner.created
+namespace de.partner.kafkaevent.created
 {
 	using System;
 	using System.Collections.Generic;
@@ -15,10 +15,10 @@ namespace de.partner.created
 	
 	public partial class PartnerCreated : ISpecificRecord
 	{
-		public static Schema _SCHEMA = Schema.Parse(@"{""type"":""record"",""name"":""PartnerCreated"",""namespace"":""de.partner.created"",""fields"":[{""name"":""id"",""type"":""string""},{""name"":""Name"",""type"":[""null"",{""type"":""record"",""name"":""Name"",""namespace"":""de.partner.created"",""fields"":[{""name"":""firstname"",""type"":""string""},{""name"":""lastname"",""type"":""string""}]}]},{""name"":""Address"",""type"":[""null"",{""type"":""record"",""name"":""Address"",""namespace"":""de.partner.created"",""fields"":[{""name"":""street"",""type"":""string""},{""name"":""city"",""type"":""string""}]}]}]}");
+		public static Schema _SCHEMA = Schema.Parse(@"{""type"":""record"",""name"":""PartnerCreated"",""namespace"":""de.partner.kafkaevent.created"",""fields"":[{""name"":""id"",""type"":""string""},{""name"":""Name"",""type"":[""null"",{""type"":""record"",""name"":""Name"",""namespace"":""de.partner.kafkaevent.created"",""fields"":[{""name"":""firstname"",""type"":""string""},{""name"":""lastname"",""type"":""string""}]}]},{""name"":""Address"",""type"":[""null"",{""type"":""record"",""name"":""Address"",""namespace"":""de.partner.kafkaevent.created"",""fields"":[{""name"":""street"",""type"":""string""},{""name"":""city"",""type"":""string""}]}]}]}");
 		private string _id;
-		private de.partner.created.Name _Name;
-		private de.partner.created.Address _Address;
+		private de.partner.kafkaevent.created.Name _Name;
+		private de.partner.kafkaevent.created.Address _Address;
 		public virtual Schema Schema
 		{
 			get
@@ -37,7 +37,7 @@ namespace de.partner.created
 				this._id = value;
 			}
 		}
-		public de.partner.created.Name Name
+		public de.partner.kafkaevent.created.Name Name
 		{
 			get
 			{
@@ -48,7 +48,7 @@ namespace de.partner.created
 				this._Name = value;
 			}
 		}
-		public de.partner.created.Address Address
+		public de.partner.kafkaevent.created.Address Address
 		{
 			get
 			{
@@ -74,8 +74,8 @@ namespace de.partner.created
 			switch (fieldPos)
 			{
 			case 0: this.id = (System.String)fieldValue; break;
-			case 1: this.Name = (de.partner.created.Name)fieldValue; break;
-			case 2: this.Address = (de.partner.created.Address)fieldValue; break;
+			case 1: this.Name = (de.partner.kafkaevent.created.Name)fieldValue; break;
+			case 2: this.Address = (de.partner.kafkaevent.created.Address)fieldValue; break;
 			default: throw new AvroRuntimeException("Bad index " + fieldPos + " in Put()");
 			};
 		}

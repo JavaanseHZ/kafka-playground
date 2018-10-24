@@ -5,7 +5,7 @@
 //    is regenerated
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace de.partner.changed
+namespace de.partner.kafkacommand.create
 {
 	using System;
 	using System.Collections.Generic;
@@ -13,17 +13,17 @@ namespace de.partner.changed
 	using global::Avro;
 	using global::Avro.Specific;
 	
-	public partial class PartnerChanged : ISpecificRecord
+	public partial class CreatePartner : ISpecificRecord
 	{
-		public static Schema _SCHEMA = Schema.Parse(@"{""type"":""record"",""name"":""PartnerChanged"",""namespace"":""de.partner.changed"",""fields"":[{""name"":""id"",""type"":""string""},{""name"":""Name"",""type"":[""null"",{""type"":""record"",""name"":""Name"",""namespace"":""de.partner.changed"",""fields"":[{""name"":""firstname"",""type"":""string""},{""name"":""lastname"",""type"":""string""}]}]},{""name"":""Address"",""type"":[""null"",{""type"":""record"",""name"":""Address"",""namespace"":""de.partner.changed"",""fields"":[{""name"":""street"",""type"":""string""},{""name"":""city"",""type"":""string""}]}]}]}");
+		public static Schema _SCHEMA = Schema.Parse(@"{""type"":""record"",""name"":""CreatePartner"",""namespace"":""de.partner.kafkacommand.create"",""fields"":[{""name"":""id"",""type"":""string""},{""name"":""Name"",""type"":[""null"",{""type"":""record"",""name"":""Name"",""namespace"":""de.partner.kafkacommand.create"",""fields"":[{""name"":""firstname"",""type"":""string""},{""name"":""lastname"",""type"":""string""}]}]},{""name"":""Address"",""type"":[""null"",{""type"":""record"",""name"":""Address"",""namespace"":""de.partner.kafkacommand.create"",""fields"":[{""name"":""street"",""type"":""string""},{""name"":""city"",""type"":""string""}]}]}]}");
 		private string _id;
-		private de.partner.changed.Name _Name;
-		private de.partner.changed.Address _Address;
+		private de.partner.kafkacommand.create.Name _Name;
+		private de.partner.kafkacommand.create.Address _Address;
 		public virtual Schema Schema
 		{
 			get
 			{
-				return PartnerChanged._SCHEMA;
+				return CreatePartner._SCHEMA;
 			}
 		}
 		public string id
@@ -37,7 +37,7 @@ namespace de.partner.changed
 				this._id = value;
 			}
 		}
-		public de.partner.changed.Name Name
+		public de.partner.kafkacommand.create.Name Name
 		{
 			get
 			{
@@ -48,7 +48,7 @@ namespace de.partner.changed
 				this._Name = value;
 			}
 		}
-		public de.partner.changed.Address Address
+		public de.partner.kafkacommand.create.Address Address
 		{
 			get
 			{
@@ -74,8 +74,8 @@ namespace de.partner.changed
 			switch (fieldPos)
 			{
 			case 0: this.id = (System.String)fieldValue; break;
-			case 1: this.Name = (de.partner.changed.Name)fieldValue; break;
-			case 2: this.Address = (de.partner.changed.Address)fieldValue; break;
+			case 1: this.Name = (de.partner.kafkacommand.create.Name)fieldValue; break;
+			case 2: this.Address = (de.partner.kafkacommand.create.Address)fieldValue; break;
 			default: throw new AvroRuntimeException("Bad index " + fieldPos + " in Put()");
 			};
 		}

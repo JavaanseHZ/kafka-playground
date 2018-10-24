@@ -2,11 +2,12 @@ using System;
 using Confluent.Kafka;
 using PartnerService.Models;
 using Confluent.Kafka.Serialization;
-using de.partner.changed;
-using de.partner.created;
+
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using de.partner.kafkaevent.changed;
+using de.partner.kafkaevent.created;
 
 namespace PartnerService.Consumers {
     public class PartnerConsumer : IPartnerConsumer {

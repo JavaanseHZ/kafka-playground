@@ -35,7 +35,7 @@ namespace PartnerService.Controllers {
         [HttpPost]
         public IActionResult Create(PartnerItem partnerItem) {
             partnerItem.id = Guid.NewGuid();
-            partnerProducer.sendPartnerCreated(partnerItem);
+            partnerProducer.sendCreatePartner(partnerItem);
             return CreatedAtRoute("GetPartner", new { id = partnerItem.id }, partnerItem);
         }
 
@@ -45,7 +45,7 @@ namespace PartnerService.Controllers {
             if (item == null) {
                 return NotFound();
             }
-            partnerProducer.sendPartnerChanged(item);
+            partnerProducer.sendChangePartner(item);
             return NoContent();
         }
     }

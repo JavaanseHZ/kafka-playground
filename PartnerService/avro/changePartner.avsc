@@ -1,7 +1,7 @@
 {
-  "namespace": "de.partner.kafkaevent.created",
+  "namespace": "de.partner.kafkacommand.change",
   "type": "record",
-  "name": "PartnerCreated",
+  "name": "ChangePartner",
   "fields": [
     { "name": "id", "type": "string" },
     { "name": "Name",

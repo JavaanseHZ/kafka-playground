@@ -16,6 +16,10 @@ namespace client {
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                   config.AddEnvironmentVariables(prefix: "KAFKA_");
+                })
                 .UseStartup<Startup>();
     }
 }

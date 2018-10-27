@@ -3,9 +3,9 @@ server:
 
 kafka:
     bootstrap:
-        address: localhost:9092
+        address: ${KAFKA_HOST:localhost}:9021
     schemaregistry:
-        address: http://localhost:8081
+        address: http://${KAFKA_HOST:localhost}:8081
     consumer:
         topic:
             event:
@@ -21,7 +21,7 @@ kafka:
                     delete: DeleteContract
 
         group:
-            id: ${CONSUMER_GROUP_ID:ClientChanged}
+            id: ${CONSUMER_GROUP_ID:contractGroup}
         offset: earliest
     producer:
         topic:

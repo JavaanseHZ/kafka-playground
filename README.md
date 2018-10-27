@@ -57,17 +57,17 @@ INSERT INTO "clientduplicates" ("oldclientid", "newclientid")
 VALUES ('[OLD-UUID]', '[NEW-UUID]');
 ```
 
-## Kafka Connect ElasticSinkConnector Configuration for Event ContractCreated
+## Kafka Connect ElasticSinkConnector Configuration for Event LifeContractCreated
 1. Create new Elastic Sink Connector [kafka-topic-connect-ui](http://localhost:3030/kafka-connect-ui/#/cluster/fast-data-dev/create-connector/io.confluent.connect.elasticsearch.ElasticsearchSinkConnector)
 2. Use the follwing Json Configuration
 ```json
 {
-  "name": "sink-contract-created-elastic",
+  "name": "sink-life-contract-created-elastic",
   "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
   "type.name": "contract",
-  "topics": "ContractCreated",
+  "topics": "LifeContractCreated",
   "tasks.max": "1",
-  "topic.index.map": "ContractCreated:contract_created",
+  "topic.index.map": "LifeContractCreated:life_contract_created",
   "connection.url": "http://elasticsearch:9200",
   "key.ignore": "true",
   "schema.ignore": "true",

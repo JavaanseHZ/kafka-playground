@@ -1,0 +1,8 @@
+{
+  "namespace": "de.client.kafkaevent.deleted",
+  "type": "record",
+  "name": "ClientDeleted",
+  "fields": [
+    { "name": "id", "type": "string" }
+  ]
+}

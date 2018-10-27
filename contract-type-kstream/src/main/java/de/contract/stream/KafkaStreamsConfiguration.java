@@ -4,19 +4,16 @@ import de.contract.kafkaevent.created.ContractCreated;
 import de.contract.life.kafkaevent.created.Client;
 import de.contract.life.kafkaevent.created.LifeContractCreated;
 import de.contract.other.kafkaevent.created.OtherContractCreated;
-import org.apache.kafka.common.utils.Bytes;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
 import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.requests.IsolationLevel;
 import org.apache.kafka.common.serialization.Serdes;
-import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
-import org.apache.kafka.streams.kstream.*;
+import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.processor.WallclockTimestampExtractor;
-import org.apache.kafka.streams.state.WindowStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,11 +21,8 @@ import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.EnableKafkaStreams;
 import org.springframework.kafka.annotation.KafkaStreamsDefaultConfiguration;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableKafka

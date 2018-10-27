@@ -1,8 +1,6 @@
 package de.contract.messaging.consumer.contract;
 
 import de.contract.kafkacommand.delete.DeleteContract;
-
-import de.contract.kafkaevent.deleted.ContractDeleted;
 import de.contract.messaging.producer.contract.ContractDeletedProducer;
 import de.contract.repository.ContractRepository;
 import org.springframework.beans.factory.annotation.Autowired;

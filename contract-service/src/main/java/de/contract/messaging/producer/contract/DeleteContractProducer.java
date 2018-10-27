@@ -1,7 +1,6 @@
 package de.contract.messaging.producer.contract;
 
 import de.contract.kafkacommand.delete.DeleteContract;
-import de.contract.kafkaevent.deleted.ContractDeleted;
 import de.contract.model.Contract;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

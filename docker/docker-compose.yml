@@ -22,8 +22,6 @@ services:
     container_name: kibana
     ports:
       - "5601:5601"
-    links:
-      - elasticsearch
 
   postgres:
     image: postgres:11.0-alpine
@@ -45,8 +43,6 @@ services:
     environment:
       - ADMINER_DEFAULT_SERVER=postgres
       - ADMINER_DESIGN=pepa-linha
-    links:
-      - postgres
 
   kafka:
     image: landoop/fast-data-dev:2.0.0
@@ -57,43 +53,29 @@ services:
       - 8081-8083:8081-8083
       - 9092:9092
     environment:
-     - ADV_HOST=kafka
+     - ADV_HOST=${HOSTNAME}
      - SAMPLEDATA=0
      - RUNTESTS=0
-    links:
-      - elasticsearch
 
-  # contract-service-same-group-1:
-  #   image: contract-service:latest
-  #   container_name: contract-service-same-group-1
-  #   ports:
-  #     - 6000:6000
-  #   environment:
-  #     - CONSUMER_GROUP_ID=sameGroup
-  #
-  # contract-service-same-group-2:
-  #   image: contract-service:latest
-  #   container_name: contract-service-same-group-2
-  #   ports:
-  #     - 6001:6000
-  #   environment:
-  #     - CONSUMER_GROUP_ID=sameGroup
-  #     - KAFKA_HOST=${HOSTNAME}
-  #
-  # contract-service-different-group:
-  #   image: contract-service:latest
-  #   container_name: contract-service-different-group
-  #   ports:
-  #     - 6002:6000
-  #   environment:
-  #     - CONSUMER_GROUP_ID=differentGroup
-  #     - KAFKA_HOST=${HOSTNAME}
-  #
-  # contract-type-kstream:
-  #   image: contract-type-kstream:latest
-  #   container_name: contract-type-kstream
-  #   environment:
-  #     - KAFKA_HOST=${HOSTNAME}
+  contract-service:
+    image: contract-service:latest
+    container_name: contract-service-same-group-1
+    ports:
+      - 6000:6000
+    environment:
+      - CONSUMER_GROUP_ID=sameGroup
+      - KAFKA_HOST=${HOSTNAME}
+    external_links:
+      - kafka:${HOSTNAME}
+
+  contract-type-kstream:
+    image: contract-type-kstream:latest
+    container_name: contract-type-kstream
+    environment:
+      - KAFKA_HOST=${HOSTNAME}
+    external_links:
+      - kafka:${HOSTNAME}
+
 
   client-service:
     image: client-service:latest
@@ -102,3 +84,5 @@ services:
       - 5000:80
     environment:
       - KAFKA_HOST=kafka
+    external_links:
+      - kafka:${HOSTNAME}

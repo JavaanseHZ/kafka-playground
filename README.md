@@ -51,7 +51,7 @@ Username:	postgres
 Password:	example
 Database: postgres
 ```
-2. Insert Client Duplicates Data (replace OLD-UUID and NEW-UUID with real values):
+2. Insert Client Duplicates Data (replace [OLD-UUID] and [NEW-UUID] with real values):
 ```sql
 INSERT INTO "clientduplicates" ("oldclientid", "newclientid")
 VALUES ('[OLD-UUID]', '[NEW-UUID]');

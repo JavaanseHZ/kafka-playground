@@ -11,23 +11,23 @@ export HOSTNAME=${HOSTNAME}
 [adminer (DB)](http://localhost:18080)
 [dejavu (elastic)](http://localhost:1358)
 
-## PartnerDubletten
+## Client Duplicates
 
-### Kafka Connect JdbcSourceConnector Configuration for PartnerDubletten
+### Kafka Connect JdbcSourceConnector Configuration for Client Duplicates
 1. Create new JDBC Source Connector [kafka-topic-connect-ui](http://localhost:3030/kafka-connect-ui/#/cluster/fast-data-dev/create-connector/io.confluent.connect.jdbc.JdbcSourceConnector)
 2. Use the follwing Json Configuration
 ```json
 {
-  "name": "source-partnerdubletten",
+  "name": "source-client-duplicates-postgres",
   "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
   "mode": "timestamp+incrementing",
   "incrementing.column.name": "id",
   "timestamp.column.name": "ts",
-  "topic.prefix": "partnerdublettenFound",
+  "topic.prefix": "clientDuplicatesFound",
   "tasks.max": "1",
   "connection.url": "jdbc:postgresql://postgres:5432/postgres?user=postgres&password=example",
   "poll.interval.ms": 1000,
-  "query": "SELECT * FROM partnerdubletten",
+  "query": "SELECT * FROM clientduplicates",
   "key.converter": "io.confluent.connect.avro.AvroConverter",
   "value.converter": "io.confluent.connect.avro.AvroConverter",
   "key.converter.schema.registry.url":"http://localhost:8081",
@@ -38,11 +38,11 @@ export HOSTNAME=${HOSTNAME}
   "transforms.extractInt.type":"org.apache.kafka.connect.transforms.ExtractField$Key",
   "transforms.extractInt.field":"id",
   "transforms.SetSchemaName.type":"org.apache.kafka.connect.transforms.SetSchemaMetadata$Value",
-  "transforms.SetSchemaName.schema.name":"de.partner.kafkaevent.dubletten.PartnerdublettenFound"
+  "transforms.SetSchemaName.schema.name":"de.partner.kafkaevent.duplicates.ClientDuplicatesFound"
 }
 ```
 
-### Insert Partnerdubletten in PostgreSQL
+### Insert Client Duplicates in PostgreSQL
 1. Login in [Adminer](http://localhost:18080)
 ```
 System:	PostgreSQL
@@ -51,23 +51,23 @@ Username:	postgres
 Password:	example
 Database: postgres
 ```
-2. Insert PartnerDubletten Data (replace OLD-UUID and NEW-UUID with real values):
+2. Insert Client Duplicates Data (replace OLD-UUID and NEW-UUID with real values):
 ```sql
-INSERT INTO "partnerdubletten" ("oldpartnerid", "newpartnerid")
+INSERT INTO "clientduplicates" ("oldclientid", "newclientid")
 VALUES ('[OLD-UUID]', '[NEW-UUID]');
 ```
 
-## Kafka Connect ElasticSinkConnector Configuration for VertragCreated
+## Kafka Connect ElasticSinkConnector Configuration for Topic ContractCreated
 1. Create new Elastic Sink Connector [kafka-topic-connect-ui](http://localhost:3030/kafka-connect-ui/#/cluster/fast-data-dev/create-connector/io.confluent.connect.elasticsearch.ElasticsearchSinkConnector)
 2. Use the follwing Json Configuration
 ```json
 {
-  "name": "VertragCreatedElasticSinkConnector",
+  "name": "sink-contract-created-elastic",
   "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
-  "type.name": "vertrag",
-  "topics": "VertragCreated",
+  "type.name": "contract",
+  "topics": "ContractCreated",
   "tasks.max": "1",
-  "topic.index.map": "VertragCreated:vertrag_created",
+  "topic.index.map": "ContractCreated:contract_created",
   "connection.url": "http://elasticsearch:9200",
   "key.ignore": "true",
   "schema.ignore": "true",

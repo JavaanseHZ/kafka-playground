@@ -7,7 +7,7 @@ kafka:
         topic:
             event:
                 contract:
-                    created: PartnerCreated
+                    created: ContractCreated
         group:
             id: contractTypeKstreamGroup
         offset: earliest

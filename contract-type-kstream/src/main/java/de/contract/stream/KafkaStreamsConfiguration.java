@@ -1,6 +1,9 @@
 package de.contract.stream;
 
 import de.contract.kafkaevent.created.ContractCreated;
+import de.contract.life.kafkaevent.created.Client;
+import de.contract.life.kafkaevent.created.LifeContractCreated;
+import de.contract.other.kafkaevent.created.OtherContractCreated;
 import org.apache.kafka.common.utils.Bytes;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
 import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
@@ -52,11 +55,11 @@ public class KafkaStreamsConfiguration {
     public StreamsConfig kStreamsConfigs() {
         final Properties props = new Properties();
         props.put(StreamsConfig.APPLICATION_ID_CONFIG,
-                "contract-type-stream");
+                "contract-type-stream-2");
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         props.put(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG,
                 registryAddress);
-        props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, SpecificAvroSerde.class);
+        props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
         props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, SpecificAvroSerde.class);
         props.put(StreamsConfig.DEFAULT_TIMESTAMP_EXTRACTOR_CLASS_CONFIG, WallclockTimestampExtractor.class.getName());
         props.put(KafkaAvroDeserializerConfig.SPECIFIC_AVRO_READER_CONFIG, true);
@@ -69,11 +72,40 @@ public class KafkaStreamsConfiguration {
     public KStream<String, ContractCreated> kStream(StreamsBuilder kStreamBuilder) {
         KStream<String, ContractCreated> stream = kStreamBuilder.stream(topicContractCreated);
 
-        KStream<String, ContractCreated> filtered = stream.filter((key, value) -> LIFE.equals(value.getType()));
+        KStream<String, ContractCreated>[] branches = stream.branch(
+                (key, value) -> LIFE.equals(value.getType()),
+                (key, value) -> !LIFE.equals(value.getType())
+        );
 
-        filtered.to(topicLifeContractCreated);
+        branches[0]
+                .mapValues(contractCreated -> {
+                    LifeContractCreated lifeContractCreated = new LifeContractCreated();
+                    lifeContractCreated.setId(contractCreated.getId());
+                    lifeContractCreated.setPremium(contractCreated.getPremium());
+                    lifeContractCreated.setType(contractCreated.getType());
+                    Client client = new Client();
+                    client.setId(contractCreated.getClient().getId());
+                    client.setFirstname(contractCreated.getClient().getFirstname());
+                    client.setLastname(contractCreated.getClient().getLastname());
+                    lifeContractCreated.setClient(client);
+                    return lifeContractCreated;
+                }).to(topicLifeContractCreated);
 
-        return filtered;
+        branches[1]
+                .mapValues(contractCreated -> {
+                    OtherContractCreated otherContractCreated = new OtherContractCreated();
+                    otherContractCreated.setId(contractCreated.getId());
+                    otherContractCreated.setPremium(contractCreated.getPremium());
+                    otherContractCreated.setType(contractCreated.getType());
+                    de.contract.other.kafkaevent.created.Client client = new de.contract.other.kafkaevent.created.Client();
+                    client.setId(contractCreated.getClient().getId());
+                    client.setFirstname(contractCreated.getClient().getFirstname());
+                    client.setLastname(contractCreated.getClient().getLastname());
+                    otherContractCreated.setClient(client);
+                    return otherContractCreated;
+                }).to(topicOtherContractCreated);
+
+        return stream;
 
     }
 

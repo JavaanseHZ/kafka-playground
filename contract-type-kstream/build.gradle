@@ -1,0 +1,55 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath('org.springframework.boot:spring-boot-gradle-plugin:2.0.6.RELEASE')
+        classpath('com.commercehub.gradle.plugin:gradle-avro-plugin:0.15.1')
+        classpath('com.bmuschko:gradle-docker-plugin:3.6.2')
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'application'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.commercehub.gradle.plugin.avro'
+apply plugin: 'com.bmuschko.docker-java-application'
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven{ url = 'http://packages.confluent.io/maven/' }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter')
+    compile('org.springframework.kafka:spring-kafka')
+    compile('org.apache.avro:avro:1.8.2')
+    compile('org.apache.kafka:kafka-streams')
+    compile('io.confluent:kafka-avro-serializer:5.0.0')
+    compile('io.confluent:kafka-streams-avro-serde:5.0.0')
+}
+
+configurations.all {
+    exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+}
+
+mainClassName = 'de.contract.ContractTypeKstreamApplication'
+
+docker {
+    javaApplication {
+        baseImage = 'openjdk:8-alpine'
+        tag = 'contract-type-kstream:latest'
+        ports = [9000, 6000]
+    }
+}
+
+dockerDistTar {
+    environmentVariable 'JAVA_OPTS', '-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap'
+}

@@ -1,0 +1,21 @@
+kafka:
+    bootstrap:
+        address: ${KAFKA_HOST:localhost}:9021
+    schemaregistry:
+        address: http://${KAFKA_HOST:localhost}:8081
+    consumer:
+        topic:
+            event:
+                contract:
+                    created: PartnerCreated
+        group:
+            id: contractTypeKstreamGroup
+        offset: earliest
+    producer:
+        topic:
+            event:
+                contract:
+                    life:
+                        created: LifeContractCreated
+                    other:
+                        created: OtherContractCreated

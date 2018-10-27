@@ -31,7 +31,7 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_PASSWORD: example
+      - POSTGRES_PASSWORD=example
     volumes:
       - ./postgres-default-config/postgresql.conf:/usr/local/share/postgresql/postgresql.conf
       - ./postgres-default-config/CreateDB.sql:/docker-entrypoint-initdb.d/CreateDB.sql

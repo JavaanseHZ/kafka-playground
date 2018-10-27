@@ -12,15 +12,15 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 @Configuration
 public class ClientDuplicatesFoundConsumerConfiguration extends ConsumerConfiguration {
 
-    private ConsumerFactory<String, ClientDuplicatesFound> clientDuplicatesFoundConsumerFactory() {
+    private ConsumerFactory<Integer, ClientDuplicatesFound> clientDuplicatesFoundConsumerFactory() {
         return new DefaultKafkaConsumerFactory(consumerFactoryProperties(), new KafkaAvroDeserializer(schemaRegistryClient, avroDeserializerProps()),
                 new KafkaAvroDeserializer(schemaRegistryClient, avroDeserializerProps()));
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, ClientDuplicatesFound>
+    public ConcurrentKafkaListenerContainerFactory<Integer, ClientDuplicatesFound>
     clientDuplicatesFoundKafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, ClientDuplicatesFound> factory
+        ConcurrentKafkaListenerContainerFactory<Integer, ClientDuplicatesFound> factory
                 = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(clientDuplicatesFoundConsumerFactory());
         return factory;

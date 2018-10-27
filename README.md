@@ -18,7 +18,7 @@ export HOSTNAME=${HOSTNAME}
 2. Use the follwing Json Configuration
 ```json
 {
-  "name": "source-client-duplicates-postgres",
+  "name": "source-client-duplicates",
   "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
   "mode": "timestamp+incrementing",
   "incrementing.column.name": "id",

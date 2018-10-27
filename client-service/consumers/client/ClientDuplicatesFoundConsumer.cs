@@ -22,10 +22,10 @@ namespace client.consumers.client {
 
         private void init() {
             AvroSerdeProvider serdeProvider = new AvroSerdeProvider(consumerConfiguration.avroConfig);
-            Consumer<String, ClientDuplicatesFound> consumerDuplicatesFound =
-                new Consumer<String, ClientDuplicatesFound>(
+            Consumer<int, ClientDuplicatesFound> consumerDuplicatesFound =
+                new Consumer<int, ClientDuplicatesFound>(
                     consumerConfiguration.consumerConfig,
-                    serdeProvider.GetDeserializerGenerator<String>(),
+                    serdeProvider.GetDeserializerGenerator<int>(),
                     serdeProvider.GetDeserializerGenerator<ClientDuplicatesFound>());
             CancellationTokenSource cts = new CancellationTokenSource();
             

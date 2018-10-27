@@ -49,7 +49,7 @@ public class KafkaStreamsConfiguration {
     public StreamsConfig kStreamsConfigs() {
         final Properties props = new Properties();
         props.put(StreamsConfig.APPLICATION_ID_CONFIG,
-                "contract-type-stream-2");
+                "contract-type-stream");
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         props.put(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG,
                 registryAddress);

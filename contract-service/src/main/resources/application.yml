@@ -9,7 +9,7 @@ kafka:
     consumer:
         topic:
             client:
-                changed: ClientChanged
+                changed: ${TOPIC_CLIENT_CHANGED:ClientChanged}
                 deleted: ClientDeleted
                 dublettenfound: ClientDuplicatesFound
         group:

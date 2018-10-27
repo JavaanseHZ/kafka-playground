@@ -80,13 +80,9 @@ public class ContractRestController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity update(@PathVariable String id) {
+    public ResponseEntity delete(@PathVariable String id) {
         contractRepository.findById(UUID.fromString(id))
-            .map(foundContract -> {
-                contractRepository.delete(foundContract);
-                contractDeletedProducer.sendEvent(id, foundContract);
-                return new ResponseEntity(HttpStatus.OK);
-            });
+            .map(foundContract -> new ResponseEntity(HttpStatus.OK));
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

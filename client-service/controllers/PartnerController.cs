@@ -11,17 +11,17 @@ namespace client.Controllers {
     [ApiController]
     public class ClientController : ControllerBase {
         private readonly ClientContext context;
-        private ClientCreatedProducer ClientCreatedProducer;
-        private ClientChangedProducer ClientChangedProducer;
-        private ClientDeletedProducer ClientDeletedProducer;
+        private ClientCreatedProducer clientCreatedProducer;
+        private ClientChangedProducer clientChangedProducer;
+        private DeleteClientProducer deleteClientProducer;
 
         public ClientController(ClientContext context,
-                ClientCreatedProducer ClientCreatedProducer,
-                ClientChangedProducer ClientChangedProducer,
-                ClientDeletedProducer ClientDeletedProducer) {
-            this.ClientCreatedProducer = ClientCreatedProducer;
-            this.ClientChangedProducer = ClientChangedProducer;
-            this.ClientDeletedProducer = ClientDeletedProducer;
+                ClientCreatedProducer clientCreatedProducer,
+                ClientChangedProducer clientChangedProducer,
+                DeleteClientProducer deleteClientProducer) {
+            this.clientCreatedProducer = clientCreatedProducer;
+            this.clientChangedProducer = clientChangedProducer;
+            this.deleteClientProducer = deleteClientProducer;
             this.context = context;
         }
 
@@ -44,7 +44,7 @@ namespace client.Controllers {
             clientItem.id = Guid.NewGuid();
             context.ClientItems.Add(clientItem);
             context.SaveChanges();
-            ClientCreatedProducer.sendEvent(clientItem);
+            clientCreatedProducer.sendEvent(clientItem);
             return CreatedAtRoute("GetClient", new { id = clientItem.id }, clientItem);
         }
 
@@ -60,7 +60,7 @@ namespace client.Controllers {
             item.city = clientItem.city;
             context.ClientItems.Update(item);
             context.SaveChanges();
-            ClientChangedProducer.sendEvent(item);
+            clientChangedProducer.sendEvent(item);
             return NoContent();
         }
 
@@ -71,9 +71,7 @@ namespace client.Controllers {
             if (item == null) {
                 return NotFound();
             }
-            context.Remove(item);
-            context.SaveChanges();
-            ClientDeletedProducer.sendEvent(item);
+            deleteClientProducer.sendEvent(item);
             return NoContent();
         }
     }

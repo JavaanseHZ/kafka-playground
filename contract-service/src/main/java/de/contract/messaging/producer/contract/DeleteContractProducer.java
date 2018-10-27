@@ -1,5 +1,6 @@
 package de.contract.messaging.producer.contract;
 
+import de.contract.kafkacommand.delete.DeleteContract;
 import de.contract.kafkaevent.deleted.ContractDeleted;
 import de.contract.model.Contract;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,17 +9,17 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ContractDeletedProducer {
+public class DeleteContractProducer {
 
-    @Value("${kafka.producer.topic.event.contract.deleted}")
+    @Value("${kafka.producer.topic.command.contract.delete}")
     private String topic;
 
     @Autowired
-    private KafkaTemplate<String, ContractDeleted> kafkaTemplateContractDeleted;
+    private KafkaTemplate<String, DeleteContract> kafkaTemplateDeleteContract;
 
     public void sendEvent(String uuid, Contract contract) {
-        ContractDeleted contractDeleted = new ContractDeleted();
-        contractDeleted.setId(contract.getId().toString());
-        kafkaTemplateContractDeleted.send(topic, uuid, contractDeleted);
+        DeleteContract deleteContract = new DeleteContract();
+        deleteContract.setId(contract.getId().toString());
+        kafkaTemplateDeleteContract.send(topic, uuid, deleteContract);
     }
 }

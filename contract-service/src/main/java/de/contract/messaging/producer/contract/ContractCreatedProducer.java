@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ContractCreatedProducer {
 
-    @Value("${kafka.producer.topic.contract.created}")
+    @Value("${kafka.producer.topic.event.contract.created}")
     private String topic;
 
     @Autowired

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-@KafkaListener(topics = "${kafka.consumer.topic.client.changed}", containerFactory = "clientChangedKafkaListenerContainerFactory")
+@KafkaListener(topics = "${kafka.consumer.topic.event.client.changed}", containerFactory = "clientChangedKafkaListenerContainerFactory")
 public class ClientChangedConsumer {
 
     @Autowired

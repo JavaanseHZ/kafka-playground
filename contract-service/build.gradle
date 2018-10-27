@@ -37,6 +37,10 @@ dependencies {
     compile('joda-time:joda-time:2.10')
 }
 
+configurations.all {
+    exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+}
+
 mainClassName = 'de.contract.ContractSpringApplication'
 
 docker {

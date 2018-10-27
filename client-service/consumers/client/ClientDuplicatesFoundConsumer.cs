@@ -22,24 +22,25 @@ namespace client.consumers.client {
 
         private void init() {
             AvroSerdeProvider serdeProvider = new AvroSerdeProvider(consumerConfiguration.avroConfig);
-            Consumer<String, ClientDuplicatesFound> consumerChanged =
+            Consumer<String, ClientDuplicatesFound> consumerDuplicatesFound =
                 new Consumer<String, ClientDuplicatesFound>(
                     consumerConfiguration.consumerConfig,
                     serdeProvider.GetDeserializerGenerator<String>(),
                     serdeProvider.GetDeserializerGenerator<ClientDuplicatesFound>());
             CancellationTokenSource cts = new CancellationTokenSource();
+            
             var consumeTask = Task.Run(() =>
             {
-                consumerChanged.OnError += (_, e)
+                consumerDuplicatesFound.OnError += (_, e)
                     => Console.WriteLine($"Error: {e.Reason}");
 
-                consumerChanged.Subscribe("ClientDuplicatesFound");
+                consumerDuplicatesFound.Subscribe("ClientDuplicatesFound");
 
                 while (!cts.Token.IsCancellationRequested) {
                     try {
-                        var consumeResult = consumerChanged.Consume(cts.Token);
+                        var consumeResult = consumerDuplicatesFound.Consume(cts.Token);
                         Console.WriteLine($"Client Changed - key: {consumeResult.Message.Key}, value: {consumeResult.Value}");
-                        var oldItem = context.ClientItems.Find(consumeResult.Value.oldclientid);
+                        var oldItem = context.ClientItems.Find(new Guid(consumeResult.Value.oldclientid));
                         if (oldItem != null) {
                             var newItem = new ClientItem {
                                 id = new Guid(consumeResult.Value.newclientid),
@@ -56,7 +57,7 @@ namespace client.consumers.client {
                         Console.WriteLine("Consume error: " + e.Error.Reason);
                     }
                 }
-                consumerChanged.Close();
+                consumerDuplicatesFound.Close();
             }, cts.Token);
         }
 

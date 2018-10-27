@@ -1,5 +1,5 @@
 server:
-    port: 6000
+    port: ${SERVER_PORT:6000}
 
 kafka:
     bootstrap:
@@ -8,16 +8,28 @@ kafka:
         address: http://localhost:8081
     consumer:
         topic:
-            client:
-                changed: ${TOPIC_CLIENT_CHANGED:ClientChanged}
-                deleted: ClientDeleted
-                dublettenfound: ClientDuplicatesFound
+            event:
+                client:
+                    changed: ClientChanged
+                    deleted: ClientDeleted
+                    duplicatesfound: ClientDuplicatesFound
+                contract:
+                    deleted: ContractDeleted
+                    delete: DeleteContract
+            command:
+                contract:
+                    delete: DeleteContract
+
         group:
-            id: contractGroup
+            id: ${CONSUMER_GROUP_ID:ClientChanged}
         offset: earliest
     producer:
         topic:
-            contract:
-                created: ContractCreated
-                changed: ContractChanged
-                deleted: ContractDeleted
+            event:
+                contract:
+                    created: ContractCreated
+                    changed: ContractChanged
+                    deleted: ContractDeleted
+            command:
+                contract:
+                    delete: DeleteContract

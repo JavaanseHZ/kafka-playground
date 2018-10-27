@@ -1,0 +1,8 @@
+{
+  "namespace": "de.client.kafkacommand.delete",
+  "type": "record",
+  "name": "DeleteClient",
+  "fields": [
+    { "name": "id", "type": "string" }
+  ]
+}

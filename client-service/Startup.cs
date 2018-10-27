@@ -19,9 +19,11 @@ namespace client
             services.AddTransient(typeof(ClientCreatedProducer));
             services.AddTransient(typeof(ClientChangedProducer));
             services.AddTransient(typeof(ClientDeletedProducer));
+            services.AddTransient(typeof(DeleteClientProducer));
 
             services.AddTransient(typeof(ConsumerConfiguration));
             services.AddTransient(typeof(ClientDuplicatesFoundConsumer));
+            services.AddTransient(typeof(DeleteClientConsumer));
 
             services.AddMvc()
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -29,6 +31,7 @@ namespace client
 
         public void Configure(IApplicationBuilder app) {
             app.ApplicationServices.GetRequiredService<ClientDuplicatesFoundConsumer>();
+            app.ApplicationServices.GetRequiredService<DeleteClientConsumer>();
             app.UseMvc();
         }
     }

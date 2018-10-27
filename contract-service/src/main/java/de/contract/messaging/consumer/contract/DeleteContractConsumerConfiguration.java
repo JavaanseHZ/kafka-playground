@@ -1,6 +1,6 @@
-package de.contract.messaging.consumer.client;
+package de.contract.messaging.consumer.contract;
 
-import de.client.kafkaevent.dubletten.ClientDuplicatesFound;
+import de.contract.kafkacommand.delete.DeleteContract;
 import de.contract.messaging.consumer.ConsumerConfiguration;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import org.springframework.context.annotation.Bean;
@@ -10,19 +10,19 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 
 @Configuration
-public class ClientDuplicatesFoundConsumerConfiguration extends ConsumerConfiguration {
+public class DeleteContractConsumerConfiguration extends ConsumerConfiguration {
 
-    private ConsumerFactory<String, ClientDuplicatesFound> clientDuplicatesFoundConsumerFactory() {
+    private ConsumerFactory<String, DeleteContract> deletecontractConsumerFactory() {
         return new DefaultKafkaConsumerFactory(consumerFactoryProperties(), new KafkaAvroDeserializer(schemaRegistryClient, avroDeserializerProps()),
                 new KafkaAvroDeserializer(schemaRegistryClient, avroDeserializerProps()));
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, ClientDuplicatesFound>
-    clientDuplicatesFoundKafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, ClientDuplicatesFound> factory
+    public ConcurrentKafkaListenerContainerFactory<String, DeleteContract>
+    deletecontractKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, DeleteContract> factory
                 = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(clientDuplicatesFoundConsumerFactory());
+        factory.setConsumerFactory(deletecontractConsumerFactory());
         return factory;
     }
 }

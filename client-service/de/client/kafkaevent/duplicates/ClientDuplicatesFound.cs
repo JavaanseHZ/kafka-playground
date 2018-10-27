@@ -15,7 +15,7 @@ namespace de.client.kafkaevent.duplicates
 	
 	public partial class ClientDuplicatesFound : ISpecificRecord
 	{
-		public static Schema _SCHEMA = Schema.Parse(@"{""type"":""record"",""name"":""ClientDuplicatesFound"",""namespace"":""de.client.kafkaevent.duplicates"",""fields"":[{""name"":""id"",""type"":""int""},{""name"":""ts"",""type"":""long""},{""name"":""oldclientid"",""default"":null,""type"":[""null"",""string""]},{""name"":""newclientid"",""default"":null,""type"":[""null"",""string""]}],""connect.name"":""de.client.duplicates.ClientDuplicatesFound""}");
+		public static Schema _SCHEMA = Schema.Parse(@"{""type"":""record"",""name"":""ClientDuplicatesFound"",""namespace"":""de.client.kafkaevent.duplicates"",""fields"":[{""name"":""id"",""type"":""int""},{""name"":""ts"",""type"":""long""},{""name"":""oldclientid"",""default"":null,""type"":[""null"",""string""]},{""name"":""newclientid"",""default"":null,""type"":[""null"",""string""]}],""connect.name"":""de.client.kafkaevent.duplicates.ClientDuplicatesFound""}");
 		private int _id;
 		private long _ts;
 		private string _oldclientid;

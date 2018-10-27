@@ -1,6 +1,6 @@
 package de.contract.messaging.consumer.client;
 
-import de.client.kafkaevent.dubletten.ClientDuplicatesFound;
+import de.client.kafkaevent.duplicates.ClientDuplicatesFound;
 import de.contract.repository.ContractRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaHandler;

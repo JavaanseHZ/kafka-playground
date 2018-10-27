@@ -8,10 +8,10 @@ export HOSTNAME=${HOSTNAME}
 ## web interfaces
 
 [kafka-topics-ui](http://localhost:3030)
-[adminer (DB)](http://localhost:18080)
-[dejavu (elastic)](http://localhost:1358)
+[adminer (postgres)](http://localhost:18080)
+[kibana (elastic)](http://localhost:5601)
 
-## Client Duplicates
+## PartnerDubletten
 
 ### Kafka Connect JdbcSourceConnector Configuration for Client Duplicates
 1. Create new JDBC Source Connector [kafka-topic-connect-ui](http://localhost:3030/kafka-connect-ui/#/cluster/fast-data-dev/create-connector/io.confluent.connect.jdbc.JdbcSourceConnector)
@@ -23,7 +23,7 @@ export HOSTNAME=${HOSTNAME}
   "mode": "timestamp+incrementing",
   "incrementing.column.name": "id",
   "timestamp.column.name": "ts",
-  "topic.prefix": "clientDuplicatesFound",
+  "topic.prefix": "ClientDuplicatesFound",
   "tasks.max": "1",
   "connection.url": "jdbc:postgresql://postgres:5432/postgres?user=postgres&password=example",
   "poll.interval.ms": 1000,
@@ -38,7 +38,7 @@ export HOSTNAME=${HOSTNAME}
   "transforms.extractInt.type":"org.apache.kafka.connect.transforms.ExtractField$Key",
   "transforms.extractInt.field":"id",
   "transforms.SetSchemaName.type":"org.apache.kafka.connect.transforms.SetSchemaMetadata$Value",
-  "transforms.SetSchemaName.schema.name":"de.partner.kafkaevent.duplicates.ClientDuplicatesFound"
+  "transforms.SetSchemaName.schema.name":"de.client.kafkaevent.duplicates.ClientDuplicatesFound"
 }
 ```
 
@@ -57,7 +57,7 @@ INSERT INTO "clientduplicates" ("oldclientid", "newclientid")
 VALUES ('[OLD-UUID]', '[NEW-UUID]');
 ```
 
-## Kafka Connect ElasticSinkConnector Configuration for Topic ContractCreated
+## Kafka Connect ElasticSinkConnector Configuration for Event ContractCreated
 1. Create new Elastic Sink Connector [kafka-topic-connect-ui](http://localhost:3030/kafka-connect-ui/#/cluster/fast-data-dev/create-connector/io.confluent.connect.elasticsearch.ElasticsearchSinkConnector)
 2. Use the follwing Json Configuration
 ```json

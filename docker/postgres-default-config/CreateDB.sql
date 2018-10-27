@@ -1,6 +1,6 @@
-CREATE TABLE clientduplicates (
+CREATE TABLE partnerduplicates (
   id SERIAL NOT NULL PRIMARY KEY,
   ts timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE 'CEST'),
-  oldClientId TEXT,
-  newClientId TEXT
+  oldclientid TEXT,
+  newclientid TEXT
 );

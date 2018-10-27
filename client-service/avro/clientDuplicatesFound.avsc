@@ -33,5 +33,5 @@
       "default": null
     }
   ],
-  "connect.name": "de.client.duplicates.ClientDuplicatesFound"
+  "connect.name": "de.client.kafkaevent.duplicates.ClientDuplicatesFound"
 }

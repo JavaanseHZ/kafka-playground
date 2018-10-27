@@ -1,6 +1,6 @@
 package de.contract.messaging.consumer.client;
 
-import de.client.kafkaevent.dubletten.ClientDuplicatesFound;
+import de.client.kafkaevent.duplicates.ClientDuplicatesFound;
 import de.contract.messaging.consumer.ConsumerConfiguration;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import org.springframework.context.annotation.Bean;

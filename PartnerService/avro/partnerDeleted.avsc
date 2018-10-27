@@ -1,8 +1,0 @@
-{
-  "namespace": "de.partner.kafkaevent.deleted",
-  "type": "record",
-  "name": "PartnerDeleted",
-  "fields": [
-    { "name": "id", "type": "string" }
-  ]
-}

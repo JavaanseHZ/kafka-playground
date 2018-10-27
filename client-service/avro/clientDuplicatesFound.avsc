@@ -1,0 +1,37 @@
+{
+  "type": "record",
+  "name": "ClientDuplicatesFound",
+  "namespace": "de.client.kafkaevent.duplicates",
+  "fields": [
+    {
+      "name": "id",
+      "type": "int"
+    },
+    {
+      "name": "ts",
+      "type": {
+        "type": "long",
+        "connect.version": 1,
+        "connect.name": "org.apache.kafka.connect.data.Timestamp",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "oldclientid",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "newclientid",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    }
+  ],
+  "connect.name": "de.client.duplicates.ClientDuplicatesFound"
+}

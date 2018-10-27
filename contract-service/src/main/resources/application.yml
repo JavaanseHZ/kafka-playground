@@ -1,0 +1,23 @@
+server:
+    port: 6000
+
+kafka:
+    bootstrap:
+        address: localhost:9092
+    schemaregistry:
+        address: http://localhost:8081
+    consumer:
+        topic:
+            client:
+                changed: ${TOPIC_CLIENT_CHANGED:ClientChanged}
+                deleted: ClientDeleted
+                dublettenfound: ClientDuplicatesFound
+        group:
+            id: contractGroup
+        offset: earliest
+    producer:
+        topic:
+            contract:
+                created: ContractCreated
+                changed: ContractChanged
+                deleted: ContractDeleted

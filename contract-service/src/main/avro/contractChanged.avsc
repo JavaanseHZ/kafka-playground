@@ -1,0 +1,31 @@
+{
+  "namespace": "de.contract.kafkaevent.changed",
+  "type": "record",
+  "name": "ContractChanged",
+  "fields": [
+    { "name": "id", "type": "string" },
+    {
+      "name": "Client",
+      "type": [
+        "null",
+        {
+          "name": "Client",
+          "type": "record",
+          "fields": [
+            { "name": "id", "type": "string" },
+            {
+              "name": "firstname",
+              "type": "string"
+            },
+            {
+              "name": "lastname",
+              "type": "string"
+            }
+          ]
+        }
+      ]
+    },
+    { "name": "type", "type": "string" },
+    { "name": "premium", "type": "double" }
+  ]
+}

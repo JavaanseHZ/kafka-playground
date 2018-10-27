@@ -1,6 +1,6 @@
 kafka:
     bootstrap:
-        address: ${KAFKA_HOST:localhost}:9021
+        address: ${KAFKA_HOST:localhost}:9092
     schemaregistry:
         address: http://${KAFKA_HOST:localhost}:8081
     consumer:

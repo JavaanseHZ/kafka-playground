@@ -57,14 +57,36 @@ services:
      - SAMPLEDATA=0
      - RUNTESTS=0
 
-  contract-service:
+  contract-service-same-group-1:
     image: contract-service:latest
     container_name: contract-service-same-group-1
     ports:
-      - 6000:6000
+      - 6001:6000
     environment:
       - CONSUMER_GROUP_ID=sameGroup
-      - KAFKA_HOST=${HOSTNAME}
+      - KAFKA_HOST=kafka
+    external_links:
+      - kafka:${HOSTNAME}
+
+  contract-service-same-group-2:
+    image: contract-service:latest
+    container_name: contract-service-same-group-2
+    ports:
+      - 6002:6000
+    environment:
+      - CONSUMER_GROUP_ID=sameGroup
+      - KAFKA_HOST=kafka
+    external_links:
+      - kafka:${HOSTNAME}
+
+  contract-service-different-group:
+    image: contract-service:latest
+    container_name: contract-service-different-group
+    ports:
+      - 6003:6000
+    environment:
+      - CONSUMER_GROUP_ID=differentGroup
+      - KAFKA_HOST=kafka
     external_links:
       - kafka:${HOSTNAME}
 
@@ -72,7 +94,7 @@ services:
     image: contract-type-kstream:latest
     container_name: contract-type-kstream
     environment:
-      - KAFKA_HOST=${HOSTNAME}
+      - KAFKA_HOST=kafka
     external_links:
       - kafka:${HOSTNAME}
 

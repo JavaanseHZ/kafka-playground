@@ -16,23 +16,19 @@ namespace PartnerService
                 opt.UseInMemoryDatabase("PartnerList"), ServiceLifetime.Transient, ServiceLifetime.Transient);
             
             services.AddTransient(typeof(ProducerConfiguration));
-            services.AddTransient(typeof(CreatePartnerProducer));
-            services.AddTransient(typeof(ChangePartnerProducer));
-            services.AddTransient(typeof(DeletePartnerProducer));
+            services.AddTransient(typeof(PartnerCreatedProducer));
+            services.AddTransient(typeof(PartnerChangedProducer));
+            services.AddTransient(typeof(PartnerDeletedProducer));
             
             services.AddTransient(typeof(ConsumerConfiguration));
-            services.AddTransient(typeof(PartnerCreatedConsumer));
-            services.AddTransient(typeof(PartnerChangedConsumer));
-            services.AddTransient(typeof(PartnerDeletedConsumer));
+            services.AddTransient(typeof(PartnerdublettenFoundConsumer));
             
             services.AddMvc()
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         public void Configure(IApplicationBuilder app) {
-            app.ApplicationServices.GetRequiredService<PartnerCreatedConsumer>();
-            app.ApplicationServices.GetRequiredService<PartnerChangedConsumer>();
-            app.ApplicationServices.GetRequiredService<PartnerDeletedConsumer>();
+            app.ApplicationServices.GetRequiredService<PartnerdublettenFoundConsumer>();
             app.UseMvc();
         }
     }

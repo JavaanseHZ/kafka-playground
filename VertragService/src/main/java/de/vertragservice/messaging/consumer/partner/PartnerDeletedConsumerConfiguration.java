@@ -1,6 +1,6 @@
-package de.vertragservice.messaging.consumer.vertrag;
+package de.vertragservice.messaging.consumer.partner;
 
-import de.vertrag.kafkaevent.created.VertragCreated;
+import de.partner.kafkaevent.deleted.PartnerDeleted;
 import de.vertragservice.messaging.consumer.ConsumerConfiguration;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import org.springframework.context.annotation.Bean;
@@ -10,19 +10,19 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 
 @Configuration
-public class VertragCreatedConsumerConfiguration extends ConsumerConfiguration {
+public class PartnerDeletedConsumerConfiguration extends ConsumerConfiguration {
 
-    private ConsumerFactory<String, VertragCreated> vertragCreatedConsumerFactory() {
+    private ConsumerFactory<String, PartnerDeleted> partnerDeletedConsumerFactory() {
         return new DefaultKafkaConsumerFactory(consumerFactoryProperties(), new KafkaAvroDeserializer(schemaRegistryClient, avroDeserializerProps()),
                 new KafkaAvroDeserializer(schemaRegistryClient, avroDeserializerProps()));
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, VertragCreated>
-    vertragCreatedKafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, VertragCreated> factory
+    public ConcurrentKafkaListenerContainerFactory<String, PartnerDeleted>
+    partnerDeletedKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, PartnerDeleted> factory
                 = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(vertragCreatedConsumerFactory());
+        factory.setConsumerFactory(partnerDeletedConsumerFactory());
         return factory;
     }
 }

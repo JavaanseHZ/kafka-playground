@@ -1,6 +1,6 @@
-package de.vertragservice.messaging.consumer.vertrag;
+package de.vertragservice.messaging.consumer.partner;
 
-import de.vertrag.kafkaevent.changed.VertragChanged;
+import de.partner.kafkaevent.dubletten.PartnerdublettenFound;
 import de.vertragservice.messaging.consumer.ConsumerConfiguration;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import org.springframework.context.annotation.Bean;
@@ -10,19 +10,19 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 
 @Configuration
-public class VertragChangedConsumerConfiguration extends ConsumerConfiguration {
+public class PartnerdublettenFoundConsumerConfiguration extends ConsumerConfiguration {
 
-    private ConsumerFactory<String, VertragChanged> vertragChangedConsumerFactory() {
+    private ConsumerFactory<String, PartnerdublettenFound> partnerdublettenFoundConsumerFactory() {
         return new DefaultKafkaConsumerFactory(consumerFactoryProperties(), new KafkaAvroDeserializer(schemaRegistryClient, avroDeserializerProps()),
                 new KafkaAvroDeserializer(schemaRegistryClient, avroDeserializerProps()));
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, VertragChanged>
-    vertragChangedKafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, VertragChanged> factory
+    public ConcurrentKafkaListenerContainerFactory<String, PartnerdublettenFound>
+    partnerdublettenFoundKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, PartnerdublettenFound> factory
                 = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(vertragChangedConsumerFactory());
+        factory.setConsumerFactory(partnerdublettenFoundConsumerFactory());
         return factory;
     }
 }

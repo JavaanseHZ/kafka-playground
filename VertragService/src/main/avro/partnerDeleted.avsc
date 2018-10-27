@@ -1,7 +1,7 @@
 {
-  "namespace": "de.vertrag.kafkacommand.delete",
+  "namespace": "de.partner.kafkaevent.deleted",
   "type": "record",
-  "name": "DeleteVertrag",
+  "name": "PartnerDeleted",
   "fields": [
     { "name": "id", "type": "string" }
   ]

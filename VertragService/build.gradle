@@ -4,8 +4,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath('org.springframework.boot:spring-boot-gradle-plugin:2.0.4.RELEASE')
-        classpath('com.commercehub.gradle.plugin:gradle-avro-plugin:0.14.1')
+        classpath('org.springframework.boot:spring-boot-gradle-plugin:2.0.6.RELEASE')
+        classpath('com.commercehub.gradle.plugin:gradle-avro-plugin:0.15.1')
         classpath('com.bmuschko:gradle-docker-plugin:3.6.2')
     }
 }

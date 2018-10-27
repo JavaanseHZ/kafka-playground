@@ -1,7 +1,8 @@
 package de.vertragservice.endpoint;
 
-import de.vertragservice.messaging.producer.ChangeVertragProducer;
-import de.vertragservice.messaging.producer.CreateVertragProducer;
+import de.vertragservice.messaging.producer.vertrag.VertragChangedProducer;
+import de.vertragservice.messaging.producer.vertrag.VertragCreatedProducer;
+import de.vertragservice.messaging.producer.vertrag.VertragDeletedProducer;
 import de.vertragservice.model.Vertrag;
 import de.vertragservice.repository.VertragRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +18,20 @@ import java.util.UUID;
 public class VertragRestController {
 
     private final VertragRepository vertragRepository;
-    private final CreateVertragProducer createVertragProducer;
-    private final ChangeVertragProducer changeVertragProducer;
+    private final VertragCreatedProducer vertragCreatedProducer;
+    private final VertragChangedProducer vertragChangedProducer;
+    private final VertragDeletedProducer vertragDeletedProducer;
 
     @Autowired
     VertragRestController(VertragRepository vertragRepository,
-                          CreateVertragProducer createVertragProducer,
-                          ChangeVertragProducer changeVertragProducer) {
+                          VertragCreatedProducer vertragCreatedProducer,
+                          VertragChangedProducer vertragChangedProducer,
+                          VertragDeletedProducer vertragDeletedProducer) {
+
         this.vertragRepository = vertragRepository;
-        this.createVertragProducer = createVertragProducer;
-        this.changeVertragProducer = changeVertragProducer;
+        this.vertragCreatedProducer = vertragCreatedProducer;
+        this.vertragChangedProducer = vertragChangedProducer;
+        this.vertragDeletedProducer = vertragDeletedProducer;
     }
 
     @GetMapping
@@ -49,7 +54,8 @@ public class VertragRestController {
     public ResponseEntity<Vertrag> create(@RequestBody Vertrag vertrag) {
         if(vertrag.getId() == null && vertrag.getPartner().getId() != null) {
             vertrag.setId(UUID.randomUUID());
-            createVertragProducer.sendEvent(vertrag.getId().toString(), vertrag);
+            vertragRepository.save(vertrag);
+            vertragCreatedProducer.sendEvent(vertrag.getId().toString(), vertrag);
             return new ResponseEntity<>(vertrag, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -57,12 +63,30 @@ public class VertragRestController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity update(@PathVariable String id, @RequestBody Vertrag vertrag) {
-        if(vertrag.getId() != null &&
-           vertrag.getPartner().getId() != null &&
-           vertragRepository.findById(UUID.fromString(id)).isPresent()) {
-                createVertragProducer.sendEvent(id, vertrag);
-                return new ResponseEntity(HttpStatus.OK);
+        if(vertrag.getId() != null && vertrag.getPartner().getId() != null) {
+            vertragRepository.findById(UUID.fromString(id))
+                .map(foundVertrag -> {
+                    foundVertrag.getPartner().setNachname(vertrag.getPartner().getNachname());
+                    foundVertrag.getPartner().setVorname(vertrag.getPartner().getVorname());
+                    foundVertrag.getPartner().setId(vertrag.getPartner().getId());
+                    foundVertrag.setBeitrag(foundVertrag.getBeitrag());
+                    foundVertrag.setSparte(foundVertrag.getSparte());
+                    vertragRepository.save(foundVertrag);
+                    vertragChangedProducer.sendEvent(id, foundVertrag);
+                    return new ResponseEntity(HttpStatus.OK);
+                });
         }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity update(@PathVariable String id) {
+        vertragRepository.findById(UUID.fromString(id))
+            .map(foundVertrag -> {
+                vertragRepository.delete(foundVertrag);
+                vertragDeletedProducer.sendEvent(id, foundVertrag);
+                return new ResponseEntity(HttpStatus.OK);
+            });
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

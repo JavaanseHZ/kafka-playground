@@ -11,17 +11,17 @@ namespace PartnerService.Controllers {
     [ApiController]
     public class PartnerController : ControllerBase {
         private readonly PartnerContext context;
-        private CreatePartnerProducer createPartnerProducer;
-        private ChangePartnerProducer changePartnerProducer;
-        private DeletePartnerProducer deletePartnerProducer;
+        private PartnerCreatedProducer PartnerCreatedProducer;
+        private PartnerChangedProducer PartnerChangedProducer;
+        private PartnerDeletedProducer PartnerDeletedProducer;
 
         public PartnerController(PartnerContext context,
-                CreatePartnerProducer createPartnerProducer,
-                ChangePartnerProducer changePartnerProducer,
-                DeletePartnerProducer deletePartnerProducer) {
-            this.createPartnerProducer = createPartnerProducer;
-            this.changePartnerProducer = changePartnerProducer;
-            this.deletePartnerProducer = deletePartnerProducer;
+                PartnerCreatedProducer PartnerCreatedProducer,
+                PartnerChangedProducer PartnerChangedProducer,
+                PartnerDeletedProducer PartnerDeletedProducer) {
+            this.PartnerCreatedProducer = PartnerCreatedProducer;
+            this.PartnerChangedProducer = PartnerChangedProducer;
+            this.PartnerDeletedProducer = PartnerDeletedProducer;
             this.context = context;
         }
 
@@ -42,7 +42,9 @@ namespace PartnerService.Controllers {
         [HttpPost]
         public IActionResult Create(PartnerItem partnerItem) {
             partnerItem.id = Guid.NewGuid();
-            createPartnerProducer.sendEvent(partnerItem);
+            context.PartnerItems.Add(partnerItem);
+            context.SaveChanges();
+            PartnerCreatedProducer.sendEvent(partnerItem);
             return CreatedAtRoute("GetPartner", new { id = partnerItem.id }, partnerItem);
         }
 
@@ -52,7 +54,13 @@ namespace PartnerService.Controllers {
             if (item == null) {
                 return NotFound();
             }
-            changePartnerProducer.sendEvent(item);
+            item.firstname = partnerItem.firstname;
+            item.lastname = partnerItem.lastname;
+            item.street = partnerItem.street;
+            item.city = partnerItem.city;
+            context.PartnerItems.Update(item);
+            context.SaveChanges();
+            PartnerChangedProducer.sendEvent(item);
             return NoContent();
         }
 
@@ -63,7 +71,9 @@ namespace PartnerService.Controllers {
             if (item == null) {
                 return NotFound();
             }
-            deletePartnerProducer.sendEvent(item);
+            context.Remove(item);
+            context.SaveChanges();
+            PartnerDeletedProducer.sendEvent(item);
             return NoContent();
         }
     }

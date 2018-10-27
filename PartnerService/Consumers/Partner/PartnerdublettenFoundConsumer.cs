@@ -6,46 +6,50 @@ using Confluent.Kafka.Serialization;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using de.partner.kafkaevent.changed;
+using de.partner.kafkaevent.dubletten;
 
 namespace PartnerService.Consumers.Partner {
-    public class PartnerChangedConsumer : AbstractConsumer {
+    public class PartnerdublettenFoundConsumer {
         private PartnerContext context;
 
         private ConsumerConfiguration consumerConfiguration;
 
-        public PartnerChangedConsumer(PartnerContext context, ConsumerConfiguration consumerConfiguration) {
+        public PartnerdublettenFoundConsumer(PartnerContext context, ConsumerConfiguration consumerConfiguration) {
             this.context = context;
             this.consumerConfiguration = consumerConfiguration;
             init();
         }
 
-        override protected void init() {
+        private void init() {
             AvroSerdeProvider serdeProvider = new AvroSerdeProvider(consumerConfiguration.avroConfig);
-            Consumer<String, PartnerChanged> consumerChanged =
-                new Consumer<String, PartnerChanged>(
+            Consumer<String, PartnerdublettenFound> consumerChanged =
+                new Consumer<String, PartnerdublettenFound>(
                     consumerConfiguration.consumerConfig,
                     serdeProvider.GetDeserializerGenerator<String>(),
-                    serdeProvider.GetDeserializerGenerator<PartnerChanged>());
-            
+                    serdeProvider.GetDeserializerGenerator<PartnerdublettenFound>());
+            CancellationTokenSource cts = new CancellationTokenSource();
             var consumeTask = Task.Run(() =>
             {
                 consumerChanged.OnError += (_, e)
                     => Console.WriteLine($"Error: {e.Reason}");
 
-                consumerChanged.Subscribe("PartnerChanged");
+                consumerChanged.Subscribe("PartnerdublettenFound");
 
                 while (!cts.Token.IsCancellationRequested) {
                     try {
                         var consumeResult = consumerChanged.Consume(cts.Token);
                         Console.WriteLine($"Partner Changed - key: {consumeResult.Message.Key}, value: {consumeResult.Value}");
-                        var item = context.PartnerItems.Find(consumeResult.Value.id);
-                        if (item != null) {
-                            item.firstname = consumeResult.Value.Name.firstname;
-                            item.lastname = consumeResult.Value.Name.lastname;
-                            item.street = consumeResult.Value.Address.street;
-                            item.city = consumeResult.Value.Address.city;
-                            context.PartnerItems.Update(item);
+                        var oldItem = context.PartnerItems.Find(consumeResult.Value.oldpartnerid);
+                        if (oldItem != null) {
+                            var newItem = new PartnerItem {
+                                id = new Guid(consumeResult.Value.newpartnerid),
+                                firstname = oldItem.firstname,
+                                lastname = oldItem.lastname,
+                                street = oldItem.street,
+                                city = oldItem.city
+                            };
+                            context.PartnerItems.Add(newItem);
+                            context.PartnerItems.Remove(oldItem);
                             context.SaveChanges();
                         }
                     } catch (ConsumeException e) {

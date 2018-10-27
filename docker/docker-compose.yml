@@ -57,42 +57,48 @@ services:
       - 8081-8083:8081-8083
       - 9092:9092
     environment:
-     - ADV_HOST=${HOSTNAME}
+     - ADV_HOST=kafka
      - SAMPLEDATA=0
      - RUNTESTS=0
     links:
       - elasticsearch
 
-  contract-service-same-group-1:
-    image: contract-service:latest
-    container_name: contract-service-same-group-1
-    ports:
-      - 6000:6000
-    environment:
-      - CONSUMER_GROUP_ID=sameGroup
-
-  contract-service-same-group-2:
-    image: contract-service:latest
-    container_name: contract-service-same-group-2
-    ports:
-      - 6001:6000
-    environment:
-      - CONSUMER_GROUP_ID=sameGroup
-
-  contract-service-different-group:
-    image: contract-service:latest
-    container_name: contract-service-different-group
-    ports:
-      - 6002:6000
-    environment:
-      - CONSUMER_GROUP_ID=differentGroup
-
-  contract-type-kstream:
-    image: contract-type-kstream:latest
-    container_name: contract-type-kstream
+  # contract-service-same-group-1:
+  #   image: contract-service:latest
+  #   container_name: contract-service-same-group-1
+  #   ports:
+  #     - 6000:6000
+  #   environment:
+  #     - CONSUMER_GROUP_ID=sameGroup
+  #
+  # contract-service-same-group-2:
+  #   image: contract-service:latest
+  #   container_name: contract-service-same-group-2
+  #   ports:
+  #     - 6001:6000
+  #   environment:
+  #     - CONSUMER_GROUP_ID=sameGroup
+  #     - KAFKA_HOST=${HOSTNAME}
+  #
+  # contract-service-different-group:
+  #   image: contract-service:latest
+  #   container_name: contract-service-different-group
+  #   ports:
+  #     - 6002:6000
+  #   environment:
+  #     - CONSUMER_GROUP_ID=differentGroup
+  #     - KAFKA_HOST=${HOSTNAME}
+  #
+  # contract-type-kstream:
+  #   image: contract-type-kstream:latest
+  #   container_name: contract-type-kstream
+  #   environment:
+  #     - KAFKA_HOST=${HOSTNAME}
 
   client-service:
-    image: client-service
+    image: client-service:latest
     container_name: client-service
     ports:
-      - 5000:5000
+      - 5000:80
+    environment:
+      - KAFKA_HOST=kafka

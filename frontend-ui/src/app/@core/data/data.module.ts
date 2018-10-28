@@ -6,7 +6,7 @@ import { ClientRestService } from './client-rest-service';
 
 const SERVICES = [
   ClientService,
-  ClientRestService
+  ClientRestService,
 ];
 
 @NgModule({

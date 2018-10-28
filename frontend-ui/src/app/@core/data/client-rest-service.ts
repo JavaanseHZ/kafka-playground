@@ -6,19 +6,19 @@ import { map, catchError, tap } from 'rxjs/operators';
 const endpoint = 'http://localhost:4200/api/client';
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json'
-  })
+    'Content-Type':  'application/json',
+  }),
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ClientRestService {
 
   constructor(private http: HttpClient) {}
 
   private extractData(res: Response) {
-    let body = res;
+    const body = res;
     return body || { };
   }
 
@@ -35,22 +35,22 @@ export class ClientRestService {
   addClient (client): Observable<any> {
     console.log(client);
     return this.http.post<any>(endpoint, JSON.stringify(client), httpOptions).pipe(
-      tap((client) => console.log(`added client w/ id=${client.id}`)),
-      catchError(this.handleError<any>('addClient'))
+      tap((resp) => console.log(`added client w/ id=${resp.id}`)),
+      catchError(this.handleError<any>('addClient')),
     );
   }
 
   updateClient (id, client): Observable<any> {
     return this.http.put(endpoint + '/' + id, JSON.stringify(client), httpOptions).pipe(
       tap(_ => console.log(`updated client id=${id}`)),
-      catchError(this.handleError<any>('updateClient'))
+      catchError(this.handleError<any>('updateClient')),
     );
   }
 
   deleteClient (id): Observable<any> {
     return this.http.delete<any>(endpoint + '/' + id, httpOptions).pipe(
       tap(_ => console.log(`deleted client id=${id}`)),
-      catchError(this.handleError<any>('deleteClient'))
+      catchError(this.handleError<any>('deleteClient')),
     );
   }
 

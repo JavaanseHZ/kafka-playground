@@ -68,11 +68,11 @@ export class ClientsComponent {
   }
 
   onCreateConfirm(event): void {
-    let client = {
+    const client = {
       firstname: event.newData.firstname,
       lastname: event.newData.lastname,
       street: event.newData.street,
-      city: event.newData.city
+      city: event.newData.city,
     }
     this.clientRestService.addClient(client).subscribe((response) => {
       event.confirm.resolve(event.newData);
@@ -88,5 +88,5 @@ export class ClientsComponent {
       console.log(response);
     });
   }
-  
+
 }

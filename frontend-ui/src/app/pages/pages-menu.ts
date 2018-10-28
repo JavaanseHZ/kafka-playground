@@ -7,4 +7,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/dashboard',
     home: true,
   },
+  {
+    title: 'Clients',
+    icon: 'nb-tables',
+    children: [
+      {
+        title: 'Client Table',
+        link: '/pages/clients/client-table',
+      },
+    ],
+  },
 ];

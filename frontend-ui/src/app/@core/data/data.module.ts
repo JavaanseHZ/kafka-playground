@@ -1,7 +1,10 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { ClientService } from './client-service';
+
 const SERVICES = [
+  ClientService,
 ];
 
 @NgModule({

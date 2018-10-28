@@ -5,7 +5,6 @@ import {
   NbMediaBreakpointsService,
   NbMenuItem,
   NbMenuService,
-  NbSidebarService,
   NbThemeService,
 } from '@nebular/theme';
 
@@ -33,7 +32,6 @@ import {
       <nb-layout-footer fixed>
         <ngx-footer></ngx-footer>
       </nb-layout-footer>
-      
     </nb-layout>
   `,
 })
@@ -56,7 +54,6 @@ export class SampleLayoutComponent implements OnDestroy {
               protected themeService: NbThemeService,
               protected bpService: NbMediaBreakpointsService) {
 
-    const isBp = this.bpService.getByName('is');
     this.menuService.onItemSelect()
       .pipe(
         takeWhile(() => this.alive),

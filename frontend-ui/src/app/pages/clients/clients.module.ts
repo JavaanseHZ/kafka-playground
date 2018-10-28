@@ -2,20 +2,19 @@ import { NgModule } from '@angular/core';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { ThemeModule } from '../../@theme/theme.module';
-import { ClientsRoutingModule, routedComponents } from './clients-routing.module';
-import { ClientService } from '../../@core/data/client-service';
+import { ClientRestService } from '../../@core/data/client-rest-service';
+import { ClientsComponent } from './clients.component';
 
 @NgModule({
   imports: [
     ThemeModule,
-    ClientsRoutingModule,
     Ng2SmartTableModule,
   ],
   declarations: [
-    ...routedComponents,
+    ClientsComponent,
   ],
   providers: [
-    ClientService,
+    ClientRestService,
   ],
 })
 export class ClientsModule { }

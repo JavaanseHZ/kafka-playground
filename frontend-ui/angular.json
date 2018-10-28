@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-admin-demo": {
+    "frontent-ui": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -59,18 +59,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ngx-admin-demo:build"
+            "browserTarget": "frontent-ui:build",
+            "proxyConfig": "proxy.conf.js" 
           },
           "configurations": {
             "production": {
-              "browserTarget": "ngx-admin-demo:build:production"
+              "browserTarget": "frontent-ui:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngx-admin-demo:build"
+            "browserTarget": "frontent-ui:build"
           }
         },
         "test": {
@@ -113,7 +114,7 @@
         }
       }
     },
-    "ngx-admin-demo-e2e": {
+    "frontent-ui-e2e": {
       "root": "",
       "sourceRoot": "",
       "projectType": "application",
@@ -122,7 +123,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "ngx-admin-demo:serve"
+            "devServerTarget": "frontent-ui:serve"
           }
         },
         "lint": {
@@ -137,7 +138,7 @@
       }
     }
   },
-  "defaultProject": "ngx-admin-demo",
+  "defaultProject": "frontent-ui",
   "schematics": {
     "@schematics/angular:component": {
       "styleext": "scss"

@@ -10,11 +10,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Clients',
     icon: 'nb-tables',
-    children: [
-      {
-        title: 'Client Table',
-        link: '/pages/clients/client-table',
-      },
-    ],
+    link: '/pages/clients',
   },
 ];

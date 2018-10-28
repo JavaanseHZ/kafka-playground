@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ClientsComponent } from './clients/clients.component';
 
 const routes: Routes = [{
   path: '',
@@ -19,7 +20,7 @@ const routes: Routes = [{
     },
     {
       path: 'clients',
-      loadChildren: './clients/clients.module#ClientsModule',
+      component: ClientsComponent,
     },
   ],
 }];

@@ -3,7 +3,6 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { ContractRestService } from '../../@core/data/contract-rest-service';
 import { EmptyFieldEditorComponent } from '../../@theme/components/table/empty-field-editor';
 import { ClientRestService } from '../../@core/data/client-rest-service';
-import { elementEnd } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'ngx-smart-table',

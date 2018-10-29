@@ -3,6 +3,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { ContractRestService } from '../../@core/data/contract-rest-service';
 import { EmptyFieldEditorComponent } from '../../@theme/components/table/empty-field-editor';
 import { ClientRestService } from '../../@core/data/client-rest-service';
+import { elementEnd } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'ngx-smart-table',
@@ -59,7 +60,7 @@ export class ContractsComponent implements OnInit{
         title: 'Client',
         type: 'html',
         filter: false,
-        valuePrepareFunction: (client) => {return client.lastname + ", " + client.firstname + "<br/>" + client.id},
+        valuePrepareFunction: (value) => value.lastname + ", " + value.firstname + "<br/>" + value.id,
         editor: {
           type: 'list',
           config:{
@@ -87,7 +88,14 @@ export class ContractsComponent implements OnInit{
     this.clientRestService.getClients().subscribe(
       (data) => {
         data.forEach(element => {
-          this.settings.columns.client.editor.config.list.push({value: element, title: element.lastname + ", " + element.firstname + "<br/>" + element.id, })
+          const client = {
+            id:element.id,
+            firstname: element.firstname,
+            lastname: element.lastname,
+          }
+          this.settings.columns.client.editor.config.list.push({
+            value: JSON.stringify(client),
+            title: element.lastname + ", " + element.firstname + ", " + element.id, })
         });
         this.settings = Object.assign({}, this.settings);
       }
@@ -101,14 +109,12 @@ export class ContractsComponent implements OnInit{
   }
 
   onCreateConfirm(event): void {
+    const newClient = JSON.parse(event.newData.client)
     const contract = {
+      id:null,
       type: event.newData.type,
       premium: event.newData.premium,
-      client : {
-        firstname : event.newData.client.firstname,
-        lastname: event.newData.client.lastname,
-        id: event.newData.client.id,
-      },
+      client : newClient,
     }
     this.contractRestService.addContract(contract).subscribe(
       (response) => event.confirm.resolve(response)
@@ -116,8 +122,15 @@ export class ContractsComponent implements OnInit{
   }
 
   onEditConfirm(event): void {
-    this.contractRestService.updateContract(event.data.id, event.newData).subscribe(
-      () => event.confirm.resolve(event.newData)
+    const newClient = JSON.parse(event.newData.client)
+    const contract = {
+      id:event.newData.id,
+      type: event.newData.type,
+      premium: event.newData.premium,
+      client : newClient,
+    }
+    this.contractRestService.updateContract(event.data.id, contract).subscribe(
+      () => event.confirm.resolve(contract)
     );
   }
 

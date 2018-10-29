@@ -10,7 +10,7 @@ import { CustomTableModule } from '../../@theme/components/table/custom-table.mo
   imports: [
     ThemeModule,
     Ng2SmartTableModule,
-    CustomTableModule
+    CustomTableModule,
   ],
   declarations: [
     ClientsComponent,

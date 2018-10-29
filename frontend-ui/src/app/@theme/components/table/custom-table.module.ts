@@ -8,4 +8,4 @@ import { EmptyFieldEditorComponent } from './empty-field-editor';
     EmptyFieldEditorComponent,
   ],
 })
-export class CustomTableModule { }
+export class CustomTableModule {}

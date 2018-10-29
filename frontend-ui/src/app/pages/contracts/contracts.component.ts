@@ -13,8 +13,8 @@ import { ClientRestService } from '../../@core/data/client-rest-service';
     }
   `],
 })
-export class ContractsComponent implements OnInit{
-  
+export class ContractsComponent implements OnInit {
+ 
   clientArray = [];
 
   settings = {
@@ -59,10 +59,10 @@ export class ContractsComponent implements OnInit{
         title: 'Client',
         type: 'html',
         filter: false,
-        valuePrepareFunction: (value) => value.lastname + ", " + value.firstname + "<br/>" + value.id,
+        valuePrepareFunction: (value) => value.lastname + ', ' + value.firstname + '<br/>' + value.id,
         editor: {
           type: 'list',
-          config:{
+          config: {
             list: this.clientArray,
           },
         },
@@ -82,54 +82,54 @@ export class ContractsComponent implements OnInit{
 
   ngOnInit(): void {
     this.contractRestService.getContracts().subscribe(
-      (data) => this.source.load(data)
+      (data) => this.source.load(data),
     );
     this.clientRestService.getClients().subscribe(
       (data) => {
         data.forEach(element => {
           const client = {
-            id:element.id,
+            id: element.id,
             firstname: element.firstname,
             lastname: element.lastname,
           }
           this.settings.columns.client.editor.config.list.push({
             value: JSON.stringify(client),
-            title: element.lastname + ", " + element.firstname + ", " + element.id, })
+            title: element.lastname + ', ' + element.firstname + ', ' + element.id, })
         });
         this.settings = Object.assign({}, this.settings);
-      }
+      },
     );
   }
 
   onDeleteConfirm(event): void {
     this.contractRestService.deleteContract(event.data.id).subscribe(
-      () => event.confirm.resolve()
+      () => event.confirm.resolve(),
     );
   }
 
   onCreateConfirm(event): void {
     const newClient = JSON.parse(event.newData.client)
     const contract = {
-      id:null,
+      id: null,
       type: event.newData.type,
       premium: event.newData.premium,
       client : newClient,
     }
     this.contractRestService.addContract(contract).subscribe(
-      (response) => event.confirm.resolve(response)
+      (response) => event.confirm.resolve(response),
     );
   }
 
   onEditConfirm(event): void {
     const newClient = JSON.parse(event.newData.client)
     const contract = {
-      id:event.newData.id,
+      id: event.newData.id,
       type: event.newData.type,
       premium: event.newData.premium,
       client : newClient,
     }
     this.contractRestService.updateContract(event.data.id, contract).subscribe(
-      () => event.confirm.resolve(contract)
+      () => event.confirm.resolve(contract),
     );
   }
 

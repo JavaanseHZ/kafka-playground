@@ -10,5 +10,4 @@ export class EmptyFieldEditorComponent extends DefaultEditor {
   constructor() {
     super();
   }
-
 }

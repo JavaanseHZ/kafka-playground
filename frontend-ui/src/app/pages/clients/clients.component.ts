@@ -12,8 +12,8 @@ import { EmptyFieldEditorComponent } from '../../@theme/components/table/empty-f
     }
   `],
 })
-export class ClientsComponent implements OnInit{
-  
+export class ClientsComponent implements OnInit {
+ 
   settings = {
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
@@ -75,13 +75,13 @@ export class ClientsComponent implements OnInit{
 
   ngOnInit(): void {
     this.clientRestService.getClients().subscribe(
-      (data) => this.source.load(data)
+      (data) => this.source.load(data),
     );
   }
 
   onDeleteConfirm(event): void {
     this.clientRestService.deleteClient(event.data.id).subscribe(
-      () => event.confirm.resolve()
+      () => event.confirm.resolve(),
     );
   }
 
@@ -93,13 +93,13 @@ export class ClientsComponent implements OnInit{
       city: event.newData.city,
     }
     this.clientRestService.addClient(client).subscribe(
-      (response) => event.confirm.resolve(response)
+      (response) => event.confirm.resolve(response),
     );
   }
 
   onEditConfirm(event): void {
     this.clientRestService.updateClient(event.data.id, event.newData).subscribe(
-      () => event.confirm.resolve(event.newData)
+      () => event.confirm.resolve(event.newData),
     );
   }
 

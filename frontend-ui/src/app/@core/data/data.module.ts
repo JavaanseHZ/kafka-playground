@@ -6,7 +6,7 @@ import { ContractRestService } from './contract-rest-service';
 
 const SERVICES = [
   ClientRestService,
-  ContractRestService
+  ContractRestService,
 ];
 
 @NgModule({

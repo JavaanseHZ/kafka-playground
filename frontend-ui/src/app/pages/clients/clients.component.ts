@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ClientRestService } from '../../@core/data/client-rest-service';
+import { EmptyFieldEditorComponent } from '../../@theme/components/table/empty-field-editor';
 
 @Component({
   selector: 'ngx-smart-table',
@@ -52,26 +52,37 @@ export class ClientsComponent implements OnInit{
         type: 'string',
         filter: false,
       },
+      id: {
+        title: 'ID',
+        type: 'string',
+        filter: false,
+        editable: false,
+        editor: {
+          type: 'custom',
+          component: EmptyFieldEditorComponent,
+        },
+      },
     },
   };
 
   source: LocalDataSource;
   clientRestService: ClientRestService;
 
-  constructor(http: HttpClient, clientRestService: ClientRestService) {
+  constructor(clientRestService: ClientRestService) {
     this.source = new LocalDataSource();
     this.clientRestService = clientRestService;
   }
 
   ngOnInit(): void {
-    this.clientRestService.getClients().subscribe((data) => this.source.load(data));
+    this.clientRestService.getClients().subscribe(
+      (data) => this.source.load(data)
+    );
   }
 
   onDeleteConfirm(event): void {
-    this.clientRestService.deleteClient(event.data.id).subscribe((response) => {
-      event.confirm.resolve();
-      console.log(response);
-    });
+    this.clientRestService.deleteClient(event.data.id).subscribe(
+      () => event.confirm.resolve()
+    );
   }
 
   onCreateConfirm(event): void {
@@ -81,17 +92,15 @@ export class ClientsComponent implements OnInit{
       street: event.newData.street,
       city: event.newData.city,
     }
-    this.clientRestService.addClient(client).subscribe((response) => {
-      event.confirm.resolve(event.newData);
-      console.log(response);
-    });
+    this.clientRestService.addClient(client).subscribe(
+      (response) => event.confirm.resolve(response)
+    );
   }
 
   onEditConfirm(event): void {
-    this.clientRestService.updateClient(event.data.id, event.newData).subscribe((response) => {
-      event.confirm.resolve(event.newData);
-      console.log(response);
-    });
+    this.clientRestService.updateClient(event.data.id, event.newData).subscribe(
+      () => event.confirm.resolve(event.newData)
+    );
   }
 
 }

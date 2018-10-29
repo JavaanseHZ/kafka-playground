@@ -59,7 +59,7 @@ export class ClientsComponent implements OnInit{
   clientRestService: ClientRestService;
 
   constructor(http: HttpClient, clientRestService: ClientRestService) {
-    this.source = new LocalDataSource());
+    this.source = new LocalDataSource();
     this.clientRestService = clientRestService;
   }
 

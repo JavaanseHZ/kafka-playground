@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ServerDataSource } from 'ng2-smart-table';
+import { LocalDataSource } from 'ng2-smart-table';
 import { ClientRestService } from '../../@core/data/client-rest-service';
 
 @Component({
@@ -12,8 +12,8 @@ import { ClientRestService } from '../../@core/data/client-rest-service';
     }
   `],
 })
-export class ClientsComponent {
-
+export class ClientsComponent implements OnInit{
+  
   settings = {
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
@@ -35,34 +35,41 @@ export class ClientsComponent {
       firstname: {
         title: 'First Name',
         type: 'string',
+        filter: false,
       },
       lastname: {
         title: 'Last Name',
         type: 'string',
+        filter: false,
       },
       street: {
         title: 'Street',
         type: 'string',
+        filter: false,
       },
       city: {
         title: 'City',
         type: 'string',
+        filter: false,
       },
     },
   };
 
-  source: ServerDataSource;
+  source: LocalDataSource;
   clientRestService: ClientRestService;
 
   constructor(http: HttpClient, clientRestService: ClientRestService) {
-    this.source = new ServerDataSource(http, { endPoint: 'http://localhost:4200/api/client' });
+    this.source = new LocalDataSource());
     this.clientRestService = clientRestService;
+  }
+
+  ngOnInit(): void {
+    this.clientRestService.getClients().subscribe((data) => this.source.load(data));
   }
 
   onDeleteConfirm(event): void {
     this.clientRestService.deleteClient(event.data.id).subscribe((response) => {
       event.confirm.resolve();
-      this.source.remove(event.data);
       console.log(response);
     });
   }
@@ -76,7 +83,6 @@ export class ClientsComponent {
     }
     this.clientRestService.addClient(client).subscribe((response) => {
       event.confirm.resolve(event.newData);
-      this.source.append(response);
       console.log(response);
     });
   }
@@ -84,7 +90,6 @@ export class ClientsComponent {
   onEditConfirm(event): void {
     this.clientRestService.updateClient(event.data.id, event.newData).subscribe((response) => {
       event.confirm.resolve(event.newData);
-      this.source.update(event.data, event.newData);
       console.log(response);
     });
   }

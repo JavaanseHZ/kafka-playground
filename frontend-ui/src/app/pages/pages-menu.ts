@@ -12,4 +12,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-tables',
     link: '/pages/clients',
   },
+  {
+    title: 'Contracts',
+    icon: 'nb-tables',
+    link: '/pages/contracts',
+  },
 ];

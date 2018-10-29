@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ClientsComponent } from './clients/clients.component';
+import { ContractsComponent } from './contracts/contracts.component';
 
 const routes: Routes = [{
   path: '',
@@ -21,6 +22,10 @@ const routes: Routes = [{
     {
       path: 'clients',
       component: ClientsComponent,
+    },
+    {
+      path: 'contracts',
+      component: ContractsComponent,
     },
   ],
 }];

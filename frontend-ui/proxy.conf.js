@@ -1,7 +1,7 @@
 const PROXY_CONFIG = [
     {
         context: [
-            "/api/client",
+            "/api/client**",
             "/api/client/*"
         ],
         target: "http://localhost:5000",
@@ -10,7 +10,7 @@ const PROXY_CONFIG = [
     },
     {
         context: [
-            "/api/contract",
+            "/api/contract**",
             "/api/contract/*"
         ],
         target: "http://localhost:6003",

@@ -13,7 +13,7 @@ import { EmptyFieldEditorComponent } from '../../@theme/components/table/empty-f
   `],
 })
 export class ClientsComponent implements OnInit {
- 
+
   settings = {
     add: {
       addButtonContent: '<i class="nb-plus"></i>',

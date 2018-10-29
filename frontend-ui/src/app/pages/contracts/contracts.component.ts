@@ -14,7 +14,7 @@ import { ClientRestService } from '../../@core/data/client-rest-service';
   `],
 })
 export class ContractsComponent implements OnInit {
- 
+
   clientArray = [];
 
   settings = {
@@ -94,7 +94,7 @@ export class ContractsComponent implements OnInit {
           }
           this.settings.columns.client.editor.config.list.push({
             value: JSON.stringify(client),
-            title: element.lastname + ', ' + element.firstname + ', ' + element.id, })
+            title: element.lastname + ', ' + element.firstname + ', ' + element.id })
         });
         this.settings = Object.assign({}, this.settings);
       },

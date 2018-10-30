@@ -3,6 +3,7 @@ package de.contract.endpoint;
 import de.contract.messaging.producer.contract.ContractChangedProducer;
 import de.contract.messaging.producer.contract.ContractCreatedProducer;
 import de.contract.messaging.producer.contract.ContractDeletedProducer;
+import de.contract.messaging.producer.contract.DeleteContractProducer;
 import de.contract.model.Contract;
 import de.contract.repository.ContractRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +22,20 @@ public class ContractRestController {
     private final ContractCreatedProducer contractCreatedProducer;
     private final ContractChangedProducer contractChangedProducer;
     private final ContractDeletedProducer contractDeletedProducer;
+    private final DeleteContractProducer deleteContractProducer;
 
     @Autowired
     ContractRestController(ContractRepository contractRepository,
                            ContractCreatedProducer contractCreatedProducer,
                            ContractChangedProducer contractChangedProducer,
-                           ContractDeletedProducer contractDeletedProducer) {
+                           ContractDeletedProducer contractDeletedProducer,
+                           DeleteContractProducer deleteContractProducer) {
 
         this.contractRepository = contractRepository;
         this.contractCreatedProducer = contractCreatedProducer;
         this.contractChangedProducer = contractChangedProducer;
         this.contractDeletedProducer = contractDeletedProducer;
+        this.deleteContractProducer = deleteContractProducer;
     }
 
     @GetMapping
@@ -64,7 +68,7 @@ public class ContractRestController {
     @PutMapping(value = "/{id}")
     public ResponseEntity update(@PathVariable String id, @RequestBody Contract contract) {
         if(contract.getId() != null && contract.getClient().getId() != null) {
-            contractRepository.findById(UUID.fromString(id))
+            return contractRepository.findById(UUID.fromString(id))
                 .map(foundContract -> {
                     foundContract.getClient().setLastname(contract.getClient().getLastname());
                     foundContract.getClient().setFirstname(contract.getClient().getFirstname());
@@ -74,15 +78,24 @@ public class ContractRestController {
                     contractRepository.save(foundContract);
                     contractChangedProducer.sendEvent(id, foundContract);
                     return new ResponseEntity(HttpStatus.OK);
-                });
+                })
+                .orElse(
+                    new ResponseEntity<>(HttpStatus.NOT_FOUND)
+                );
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity delete(@PathVariable String id) {
-        contractRepository.findById(UUID.fromString(id))
-            .map(foundContract -> new ResponseEntity(HttpStatus.OK));
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return contractRepository.findById(UUID.fromString(id))
+            .map(
+                foundContract -> {
+                    deleteContractProducer.sendEvent(id, foundContract);
+                    return new ResponseEntity(HttpStatus.OK);
+                })
+            .orElse(
+                new ResponseEntity<>(HttpStatus.NOT_FOUND)
+        );
     }
 }

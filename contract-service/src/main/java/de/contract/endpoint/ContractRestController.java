@@ -2,7 +2,6 @@ package de.contract.endpoint;
 
 import de.contract.messaging.producer.contract.ContractChangedProducer;
 import de.contract.messaging.producer.contract.ContractCreatedProducer;
-import de.contract.messaging.producer.contract.ContractDeletedProducer;
 import de.contract.messaging.producer.contract.DeleteContractProducer;
 import de.contract.model.Contract;
 import de.contract.repository.ContractRepository;
@@ -21,20 +20,17 @@ public class ContractRestController {
     private final ContractRepository contractRepository;
     private final ContractCreatedProducer contractCreatedProducer;
     private final ContractChangedProducer contractChangedProducer;
-    private final ContractDeletedProducer contractDeletedProducer;
     private final DeleteContractProducer deleteContractProducer;
 
     @Autowired
     ContractRestController(ContractRepository contractRepository,
                            ContractCreatedProducer contractCreatedProducer,
                            ContractChangedProducer contractChangedProducer,
-                           ContractDeletedProducer contractDeletedProducer,
                            DeleteContractProducer deleteContractProducer) {
 
         this.contractRepository = contractRepository;
         this.contractCreatedProducer = contractCreatedProducer;
         this.contractChangedProducer = contractChangedProducer;
-        this.contractDeletedProducer = contractDeletedProducer;
         this.deleteContractProducer = deleteContractProducer;
     }
 

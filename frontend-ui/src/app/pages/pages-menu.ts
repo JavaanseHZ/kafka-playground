@@ -9,12 +9,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Clients',
-    icon: 'nb-tables',
+    icon: 'nb-person',
     link: '/pages/clients',
   },
   {
     title: 'Contracts',
-    icon: 'nb-tables',
+    icon: 'nb-compose',
     link: '/pages/contracts',
   },
 ];

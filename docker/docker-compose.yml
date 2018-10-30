@@ -98,7 +98,6 @@ services:
     external_links:
       - kafka:${HOSTNAME}
 
-
   client-service:
     image: client-service:latest
     container_name: client-service
@@ -108,3 +107,19 @@ services:
       - KAFKA_HOST=kafka
     external_links:
       - kafka:${HOSTNAME}
+
+  frontend-ui:
+    image: frontend-ui:latest
+    container_name: frontent-ui
+    ports:
+      - 80
+
+  reverse-proxy:
+    image: reverse-proxy:latest
+    container_name: reverse-proxy
+    ports:
+      - 4400:80
+    depends_on:
+      - frontend-ui
+      - client-service
+      - contract-service-different-group

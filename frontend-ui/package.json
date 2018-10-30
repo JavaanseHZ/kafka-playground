@@ -1,13 +1,13 @@
 {
-  "name": "ngx-admin",
+  "name": "frontend-ui",
   "version": "2.3.0",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/akveo/ngx-admin.git"
+    "url": "git+https://github.com/JavaanseHZ/kafka-playground.git"
   },
   "bugs": {
-    "url": "https://github.com/akveo/ngx-admin/issues"
+    "url": "https://github.com/JavaanseHZ/kafka-playground/issues"
   },
   "browserslist": [
     "> 1%",

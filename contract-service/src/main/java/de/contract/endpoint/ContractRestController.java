@@ -69,8 +69,8 @@ public class ContractRestController {
                     foundContract.getClient().setLastname(contract.getClient().getLastname());
                     foundContract.getClient().setFirstname(contract.getClient().getFirstname());
                     foundContract.getClient().setId(contract.getClient().getId());
-                    foundContract.setPremium(foundContract.getPremium());
-                    foundContract.setType(foundContract.getType());
+                    foundContract.setPremium(contract.getPremium());
+                    foundContract.setType(contract.getType());
                     contractRepository.save(foundContract);
                     contractChangedProducer.sendEvent(id, foundContract);
                     return new ResponseEntity(HttpStatus.OK);

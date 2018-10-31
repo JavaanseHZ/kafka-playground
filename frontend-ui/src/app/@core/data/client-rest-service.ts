@@ -36,29 +36,19 @@ export class ClientRestService {
     console.log(client);
     return this.http.post<any>(endpoint, JSON.stringify(client), httpOptions).pipe(
       tap((resp) => console.log(`added client w/ id=${resp.id}`)),
-      catchError(this.handleError<any>('addClient')),
     );
   }
 
   updateClient (id, client): Observable<any> {
     return this.http.put(endpoint + '/' + id, JSON.stringify(client), httpOptions).pipe(
       tap(_ => console.log(`updated client id=${id}`)),
-      catchError(this.handleError<any>('updateClient')),
     );
   }
 
   deleteClient (id): Observable<any> {
     return this.http.delete<any>(endpoint + '/' + id, httpOptions).pipe(
       tap(_ => console.log(`deleted client id=${id}`)),
-      catchError(this.handleError<any>('deleteClient')),
     );
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error); // log to console instead
-      console.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
-  }
 }

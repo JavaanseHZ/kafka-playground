@@ -39,17 +39,9 @@ namespace client.consumers.client {
                 while (!cts.Token.IsCancellationRequested) {
                     try {
                         var consumeResult = consumerDuplicatesFound.Consume(cts.Token);
-                        Console.WriteLine($"Client Changed - key: {consumeResult.Message.Key}, value: {consumeResult.Value}");
+                        Console.WriteLine($"Client Duplicate Found - key: {consumeResult.Message.Key}, value: {consumeResult.Value}");
                         var oldItem = context.ClientItems.Find(new Guid(consumeResult.Value.oldclientid));
                         if (oldItem != null) {
-                            var newItem = new ClientItem {
-                                id = new Guid(consumeResult.Value.newclientid),
-                                firstname = oldItem.firstname,
-                                lastname = oldItem.lastname,
-                                street = oldItem.street,
-                                city = oldItem.city
-                            };
-                            context.ClientItems.Add(newItem);
                             context.ClientItems.Remove(oldItem);
                             context.SaveChanges();
                         }

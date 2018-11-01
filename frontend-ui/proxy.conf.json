@@ -8,7 +8,7 @@
     }
   },
   "/contract/**": {
-    "target": "http://localhost:6003",
+    "target": "http://localhost:6000",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,

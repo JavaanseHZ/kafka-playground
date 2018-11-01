@@ -100,4 +100,4 @@ services:
     depends_on:
       - frontend-ui
       - client-service
-      - contract-service-different-group
+      - contract-service

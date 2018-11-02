@@ -9,11 +9,15 @@ rcC.rectangle(200, 200, 200, 200, {
 });
 
 var context = canvas.getContext("2d");
-
 context.fillStyle = "black";
 //not working
-context.font = 'normal 80px Quickhand'
-context.textAlign = 'center';
-context.textBaseline = 'middle';
-context.fillText("Bla", (canvas.width / 2), (canvas.height / 2));
+var f = new FontFace("quickhands-woff", "url(../res/fonts/Quikhand.woff)", {});
+f.load().then(function (font) {
+    document.fonts.add(font);
+    context.font = '80px quickhands-woff'
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+    context.fillText("Bla", (canvas.width / 2), (canvas.height / 2));
+});
+
 						

@@ -1,0 +1,5 @@
+@font-face {
+    font-family: 'Quickhand';
+    src: url('../res/fonts/Quikhand.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../res/fonts/Quikhand.ttf') format('truetype') /* Safari, Android, iOS */
+  }

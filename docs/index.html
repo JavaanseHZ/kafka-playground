@@ -12,7 +12,7 @@
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
+		<script src="includes/js/shades.js"></script>
 		<!-- Printing and PDF exports -->
 		<script>
 			var link = document.createElement( 'link' );
@@ -28,11 +28,19 @@
 		
 		<div class="reveal">
 			<div class="slides">
-				<section data-external="includes/slides/01-start.html"> </section>
-				<section>
-					<h3>Distributed Event-Stream-Processing Platform</h3>
-					<canvas width="950" height=300" id="canvasPubSub"></canvas>
-					<script src="includes/slides/02-pup-sub.js" defer></script>
+				<section data-external="includes/slides/00-start.html"> </section>
+				<section data-external="includes/slides/01-events/01-event-stream-processing.html"> </section>
+				<section data-transition="slide-in fade-out">
+					<h4 style>Distributed <span style="color: #FF8C42">Event-Stream-Processing</span> Platform</h4>
+					<h5>Inner-Application</h5>
+					<canvas width="950" height=200" id="canvasPubSub"></canvas>
+					<script src="includes/slides/01-events/pup-sub.js" defer></script>
+				</section>
+				<section data-transition="fade-in slide-out">
+					<h4 style>Distributed <span style="color: #FF8C42">Event-Stream-Processing</span> Platform</h4>
+					<h5>Inter-Application</h5>
+					<canvas width="950" height=200" id="canvasProdCons"></canvas>
+					<script src="includes/slides/01-events/prod-cons.js" defer></script>
 				</section>
 			</div>
 		</div>

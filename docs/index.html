@@ -21,13 +21,6 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
-		<script>
-			var f = new FontFace("Rudiment", "url(includes/fonts/Rudiment.woff)", {});
-			f.load().then(function (font) {
-				document.fonts.add(font);
-			})
-		</script>
-		
 		<script src="plugin/roughjs/rough.min.js"></script>
 		<script src="plugin/roughjs/workly.min.js"></script>
 	</head>
@@ -37,8 +30,8 @@
 			<div class="slides">
 				<section data-external="includes/slides/01-start.html"> </section>
 				<section>
-					<h3>Event-Stream-Processing-Platform</h3>
-					<canvas width="750" height=300" id="canvasPubSub"></canvas>
+					<h3>Distributed Event-Stream-Processing Platform</h3>
+					<canvas width="950" height=300" id="canvasPubSub"></canvas>
 					<script src="includes/slides/02-pup-sub.js" defer></script>
 				</section>
 			</div>

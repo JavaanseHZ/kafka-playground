@@ -17,7 +17,7 @@
 // Include theme-specific fonts
 @import url(../../lib/font/league-gothic/league-gothic.css);
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
-@import url(../../include/css/rudiment.css);
+@import url(../playground.css);
 
 // Override theme settings (see ../template/settings.scss)
 $headingFont: 'Rudiment', sans-serif;

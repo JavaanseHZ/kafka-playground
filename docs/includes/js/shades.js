@@ -2,7 +2,7 @@
 const blue = '#6699CC';
 const yellow = '#FFF275';
 const orange = '#FF8C42'; 
-const red = '#FF3C38'; 
+const green = '#77A756'; 
 const burgundy = '#A23E48';
 const transientWhite = '#FFFFFFAA';
 

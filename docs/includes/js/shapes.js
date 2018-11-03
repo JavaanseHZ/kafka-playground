@@ -4,6 +4,7 @@ const yellow = '#FFF275';
 const orange = '#FF8C42'; 
 const green = '#77A756'; 
 const burgundy = '#A23E48';
+const purple ="#4F3C5B" 
 const transientWhite = '#FFFFFFBB';
 
 const rudimentFont = new FontFace("Rudiment", "url(includes/fonts/Rudiment.woff)", {});

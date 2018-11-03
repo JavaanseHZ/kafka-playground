@@ -1,0 +1,22 @@
+<div style="min-height: 700px;">
+    <h4 class="headerTop">Distributed <span class="highlightTextOrange">Event</span>-Stream-Processing Platform</h4>
+    <h5 class="headerTop">Avro</h5>
+    <h6 class="headerTop">Schema</h6>
+    <pre><code data-trim data-noescape>
+    {
+        "namespace": "de.client.kafkaevent",
+        "type": "record",
+        "name": "ClientCreated",
+        "fields": [
+        { "name": <mark>"id"</mark>, "type": "string" },
+        { "name": <mark>"Name"</mark>,
+            "type": ["null", {
+            "name": "Name",
+            "type": "record",
+            "fields": [
+                { "name": <mark>"firstname"</mark>, "type": "string" },
+                { "name": <mark>"lastname"</mark>, "type": "string" }]
+            }]
+    }
+    </code></pre>
+</div>

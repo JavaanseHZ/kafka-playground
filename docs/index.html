@@ -66,6 +66,8 @@
 							</div>
 						</div>
 					</section>
+					<section data-transition="slide-in fade-out" data-external="includes/slides/01-events/05-avro.html"> </section>
+					<section data-transition="fade-in slide-out" data-external="includes/slides/01-events/06-avro.html"> </section>
 				</section>
 
 				<!-- 02 Distributed Platform -->
@@ -134,7 +136,7 @@
 							</div>
 						</div>
 					</section>
-					<section data-external="includes/slides/02-distributed/09-properties.html"> </section>
+					<section data-external="includes/slides/02-distributed/12-properties.html"> </section>
 				</section>
 			</div>
 		</div>
@@ -146,6 +148,7 @@
 			Reveal.initialize({
 				fragmentInURL: true,
 				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
 					{ src: 'plugin/chalkboard/chalkboard.js' },
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },

@@ -4,7 +4,7 @@ const yellow = '#FFF275';
 const orange = '#FF8C42'; 
 const green = '#77A756'; 
 const burgundy = '#A23E48';
-const transientWhite = '#FFFFFFAA';
+const transientWhite = '#FFFFFFBB';
 
 const rudimentFont = new FontFace("Rudiment", "url(includes/fonts/Rudiment.woff)", {});
 
@@ -31,7 +31,7 @@ function rectangle (canvas, x, y, w, h, color, text, textcolor){
     }
 }
 
-function rectangleArray (canvas, x, y, w, h, color, fields){
+function rectangleArray (canvas, x, y, w, h, color, fields) {
     var rcC = rough.canvas(canvas);
 
     rcC.rectangle(x, y, w, h, {
@@ -41,28 +41,31 @@ function rectangleArray (canvas, x, y, w, h, color, fields){
         fillStyle: 'solid',
         roughness:'2'
     });
-    var distance = w/fields.length;
-    var pathx = distance;
-    fields.forEach(element => {
-        if(element != fields[fields.length -1]) {
-            rcC.polygon([[pathx, y - 4], [pathx, y + h + 4]], {
-                stroke: color,
-                strokeWidth: '4',
-                roughness:'2'
-            });
+
+    rudimentFont.load().then(function (font) {
+        var distance = w/fields.length;
+        var pathx = distance;
+        fields.forEach(element => {
             
-        }
-        var context = canvas.getContext("2d");
-        context.fillStyle = element[1];
-        rudimentFont.load().then(function (font) {
+            if(element != fields[fields.length -1]) {
+                rcC.polygon([[pathx, y + 4], [pathx, y + h - 4]], {
+                    stroke: color,
+                    strokeWidth: '4',
+                    roughness:'2'
+                });
+                
+            }
+
+            var context = canvas.getContext("2d");
+            context.fillStyle = element[1];
             document.fonts.add(font);
             context.font =  h/2 + 'px Rudiment'
             context.textAlign = 'center';
             context.textBaseline = 'middle';
             context.fillText(element[0], (x + pathx - (distance/2)), (y + (h/2)));
+            
+            pathx = (pathx + distance); 
         });
-        pathx = pathx + distance; 
-        
     });
         
 }

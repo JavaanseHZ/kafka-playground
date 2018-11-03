@@ -48,10 +48,10 @@ var RevealChalkboard = window.RevealChalkboard || (function(){
 			break;
 		default:
 			background = [ 'rgba(127,127,127,.1)' , path + 'img/blackboard.png' ];
-			pen = [ 'url(' + path + 'img/boardmarker.png), auto',
+			pen = [ 'url(' + path + 'img/chalk.png), auto',
 				'url(' + path + 'img/chalk.png), auto' ];
-			draw = [ drawWithPen , drawWithChalk ];
-			color = [ 'rgba(0,0,255,1)', 'rgba(255,255,255,0.5)'  ];
+			draw = [ drawWithChalk , drawWithChalk ];
+			color = [ 'rgba(255,255,255,0.5)', 'rgba(255,255,255,0.5)'  ];
 	}
 	
 	if ( config.background ) background = config.background;

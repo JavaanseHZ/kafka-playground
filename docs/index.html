@@ -7,8 +7,7 @@
 		<title>Kafka Playground Presentation</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/league.css">
-		<link rel="stylesheet" href="css/quickhand-font.css">
+		<link rel="stylesheet" href="css/theme/league-alt.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -22,28 +21,27 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
+		<script>
+			var f = new FontFace("Rudiment", "url(includes/fonts/Rudiment.woff)", {});
+			f.load().then(function (font) {
+				document.fonts.add(font);
+			})
+		</script>
+		
 		<script src="plugin/roughjs/rough.min.js"></script>
 		<script src="plugin/roughjs/workly.min.js"></script>
 	</head>
 	<body>
-		<!-- colors:
-		6699CC blue
-		FFF275 yellow
-		FF8C42 orange
-		FF3C38 red
-		A23E48 burgundy -->
+		
 		<div class="reveal">
 			<div class="slides">
-				<section data-external="includes/01-start.html"> </section>
+				<section data-external="includes/slides/01-start.html"> </section>
 				<section>
-					<svg style="display: block; width: 800px; height: 600px;" id="svgPubSub"></svg>
-					<script src="includes/02-pup-sub.js" defer></script>
-				</section>
-				<section>
+					<h1>erewr</h1>
+					<p>sadsad</p>
 					<div>
-						<p>Test</p>
-						<canvas width="800" height=600" id="canvasPubSub"></canvas>
-						<script src="includes/03-pup-sub.js" defer></script>
+						<canvas width="750" height=300" id="canvasPubSub"></canvas>
+						<script src="includes/slides/02-pup-sub.js" defer></script>
 					</div>
 				</section>
 			</div>
@@ -54,11 +52,11 @@
 
 		<script>
 			Reveal.initialize({
+				fragmentInURL: true,
 				dependencies: [
 					{ src: 'plugin/chalkboard/chalkboard.js' },
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/roughjs/rough.min.js'},
 					{ src: 'plugin/external/external.js', 
@@ -75,8 +73,7 @@
 					68: function() { RevealChalkboard.download() }	// downlad recorded chalkboard drawing when 'd' is pressed
 				},
 				chalkboard: { 
-					color: [ 'rgba(255,0,0,1)', 'rgba(255,255,255,0.5)' ],
-					toggleNotesButton: false
+					color: [ 'rgba(255,255,255,0.5)', 'rgba(255,255,255,0.5)' ],
 				},
 			});
 		</script>

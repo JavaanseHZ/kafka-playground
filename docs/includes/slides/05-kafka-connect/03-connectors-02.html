@@ -1,0 +1,22 @@
+<div style="min-height: 700px;">
+    <h4 class="headerTop"><span class="highlightTextOrange">Kafka Connect</span></h4>
+    <div class="verticalCenter">
+        <h5 class="headerTop">Connector Configuration</h5>
+        <pre><code data-trim data-noescape>
+            {
+                "name": "source-client-changed",
+                "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+                "mode": "timestamp",
+                "timestamp.column.name": "ts",
+                "topic.prefix": "ClientChanged",
+                "query": "SELECT * FROM clients",
+                "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "connection.url": "jdbc:postgresql://postgres:5432/postgres",
+                "connection.user":"postgres",
+                "connection.password":"example",
+                "poll.interval.ms": 1000,
+                "tasks.max": "1",
+            }
+        </code></pre>
+    </div>

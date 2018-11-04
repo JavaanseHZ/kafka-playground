@@ -11,8 +11,3 @@ rectangle(canvasArch04, xcanvasArch04Center - 150, ycanvasArch04Center - 150, 30
 rectangle(canvasArch04, xcanvasArch04Center - 150, ycanvasArch04Center - 50, 300, 80, burgundy, 'Schema-Registry', 'black');
 rectangle(canvasArch04, xcanvasArch04Center - 150, ycanvasArch04Center + 50, 300, 80, burgundy, 'Kafka-Connect', 'black');
 rectangle(canvasArch04, xcanvasArch04Center - 150, ycanvasArch04Center + 150, 300, 80, burgundy, 'Rest-Proxy', 'black');
-
-
-
-
-

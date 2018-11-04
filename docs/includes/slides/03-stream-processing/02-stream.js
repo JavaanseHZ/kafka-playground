@@ -5,7 +5,3 @@ rectangleArray(canvasStream, 300, ycanvasStreamCenter - 50, 350, 100, burgundy, 
 rectangle(canvasStream, 800, ycanvasStreamCenter - 50, 100, 100, yellow, 'Cons', 'black');
 arrow (canvasStream, 170, ycanvasStreamCenter, 280, ycanvasStreamCenter, blue)
 arrow (canvasStream, 670, ycanvasStreamCenter, 780, ycanvasStreamCenter, yellow)
-
-
-
-

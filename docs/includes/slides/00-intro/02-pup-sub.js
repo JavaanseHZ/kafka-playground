@@ -6,7 +6,3 @@ rectangle(canvasPubSub, 350, yCanvasPubSubCenter - 50, 250, 100, burgundy, 'Runt
 rectangle(canvasPubSub, 800, yCanvasPubSubCenter - 50, 100, 100, yellow, 'Sub', 'black');
 arrow (canvasPubSub, 170, yCanvasPubSubCenter, 330, yCanvasPubSubCenter, blue)
 arrow (canvasPubSub, 620, yCanvasPubSubCenter, 780, yCanvasPubSubCenter, yellow)
-
-
-
-

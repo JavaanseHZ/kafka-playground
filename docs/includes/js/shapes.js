@@ -20,9 +20,9 @@ function rectangle (canvas, x, y, w, h, color, text, textcolor){
         roughness:'2'
     });
     if(text != null) {
-        var context = canvas.getContext("2d");
-        context.fillStyle = textcolor;
         rudimentFont.load().then(function (font) {
+            var context = canvas.getContext("2d");
+            context.fillStyle = textcolor;  
             document.fonts.add(font);
             context.font =  h/2 + 'px Rudiment'
             context.textAlign = 'center';
@@ -56,7 +56,6 @@ function rectangleArray (canvas, x, y, w, h, color, fields) {
                 });
                 
             }
-
             var context = canvas.getContext("2d");
             context.fillStyle = element[1];
             document.fonts.add(font);
@@ -83,10 +82,9 @@ function ellipse (canvas, x, y, w, h, color, text, textcolor){
     });
 
     if(text != null) {
-        var context = canvas.getContext("2d");
-        context.fillStyle = textcolor;
-        
         rudimentFont.load().then(function (font) {
+            var context = canvas.getContext("2d");
+            context.fillStyle = textcolor;
             document.fonts.add(font);
             context.font =  h/2 + 'px Rudiment'
             context.textAlign = 'center';

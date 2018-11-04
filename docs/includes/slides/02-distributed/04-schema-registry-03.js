@@ -12,5 +12,4 @@ rectangle(canvasSchemaRegistry03, xcanvasSchemaRegistry03Center - 150, ycanvasSc
 rectangle(canvasSchemaRegistry03, 10, ycanvasSchemaRegistry03Center - 50, 150, 100, blue, 'Prod', 'black');
 rectangle(canvasSchemaRegistry03, canvasSchemaRegistry03.width - 160, ycanvasSchemaRegistry03Center - 50, 150, 100, yellow, 'Cons', 'black');
 
-arrow (canvasSchemaRegistry03, 120, ycanvasSchemaRegistry03Center - 60, xcanvasSchemaRegistry03Center - 160, ycanvasSchemaRegistry03Center - 140, transientWhite);
-arrow (canvasSchemaRegistry03, xcanvasSchemaRegistry03Center - 120, ycanvasSchemaRegistry03Center - 100, 170, ycanvasSchemaRegistry03Center - 20, green);
+arrow (canvasSchemaRegistry03, 120, ycanvasSchemaRegistry03Center - 60, xcanvasSchemaRegistry03Center - 160, ycanvasSchemaRegistry03Center - 140, purple);

@@ -13,5 +13,4 @@ rectangle(canvasSchemaRegistry04, 10, ycanvasSchemaRegistry04Center - 50, 150, 1
 rectangle(canvasSchemaRegistry04, canvasSchemaRegistry04.width - 160, ycanvasSchemaRegistry04Center - 50, 150, 100, yellow, 'Cons', 'black');
 
 arrow (canvasSchemaRegistry04, 120, ycanvasSchemaRegistry04Center - 60, xcanvasSchemaRegistry04Center - 160, ycanvasSchemaRegistry04Center - 140, transientWhite);
-arrow (canvasSchemaRegistry04, xcanvasSchemaRegistry04Center - 120, ycanvasSchemaRegistry04Center - 100, 170, ycanvasSchemaRegistry04Center - 20, transientWhite);
-arrow (canvasSchemaRegistry04, 170, ycanvasSchemaRegistry04Center + 20, xcanvasSchemaRegistry04Center - 120, ycanvasSchemaRegistry04Center + 100, green);
+arrow (canvasSchemaRegistry04, xcanvasSchemaRegistry04Center - 120, ycanvasSchemaRegistry04Center - 100, 170, ycanvasSchemaRegistry04Center - 20, green);

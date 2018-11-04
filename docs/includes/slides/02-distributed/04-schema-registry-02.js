@@ -11,5 +11,3 @@ rectangle(canvasSchemaRegistry02, xcanvasSchemaRegistry02Center - 150, ycanvasSc
 
 rectangle(canvasSchemaRegistry02, 10, ycanvasSchemaRegistry02Center - 50, 150, 100, blue, 'Prod', 'black');
 rectangle(canvasSchemaRegistry02, canvasSchemaRegistry02.width - 160, ycanvasSchemaRegistry02Center - 50, 150, 100, yellow, 'Cons', 'black');
-
-arrow (canvasSchemaRegistry02, 120, ycanvasSchemaRegistry02Center - 60, xcanvasSchemaRegistry02Center - 160, ycanvasSchemaRegistry02Center - 140, purple);

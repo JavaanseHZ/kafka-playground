@@ -17,5 +17,4 @@ arrow (canvasSchemaRegistry07, xcanvasSchemaRegistry07Center - 120, ycanvasSchem
 arrow (canvasSchemaRegistry07, 170, ycanvasSchemaRegistry07Center + 20, xcanvasSchemaRegistry07Center - 120, ycanvasSchemaRegistry07Center + 100, transientWhite);
 
 arrow (canvasSchemaRegistry07, xcanvasSchemaRegistry07Center + 120, ycanvasSchemaRegistry07Center + 100, canvasSchemaRegistry07.width - 170, ycanvasSchemaRegistry07Center + 20, transientWhite);
-arrow (canvasSchemaRegistry07, canvasSchemaRegistry07.width - 170, ycanvasSchemaRegistry07Center - 20, xcanvasSchemaRegistry07Center + 120, ycanvasSchemaRegistry07Center - 100, transientWhite);
-arrow (canvasSchemaRegistry07, xcanvasSchemaRegistry07Center + 160, ycanvasSchemaRegistry07Center - 140, canvasSchemaRegistry07.width -120, ycanvasSchemaRegistry07Center - 60, purple);
+arrow (canvasSchemaRegistry07, canvasSchemaRegistry07.width - 170, ycanvasSchemaRegistry07Center - 20, xcanvasSchemaRegistry07Center + 120, ycanvasSchemaRegistry07Center - 100, green);

@@ -14,6 +14,4 @@ rectangle(canvasSchemaRegistry05, canvasSchemaRegistry05.width - 160, ycanvasSch
 
 arrow (canvasSchemaRegistry05, 120, ycanvasSchemaRegistry05Center - 60, xcanvasSchemaRegistry05Center - 160, ycanvasSchemaRegistry05Center - 140, transientWhite);
 arrow (canvasSchemaRegistry05, xcanvasSchemaRegistry05Center - 120, ycanvasSchemaRegistry05Center - 100, 170, ycanvasSchemaRegistry05Center - 20, transientWhite);
-arrow (canvasSchemaRegistry05, 170, ycanvasSchemaRegistry05Center + 20, xcanvasSchemaRegistry05Center - 120, ycanvasSchemaRegistry05Center + 100, transientWhite);
-
-arrow (canvasSchemaRegistry05, xcanvasSchemaRegistry05Center + 120, ycanvasSchemaRegistry05Center + 100, canvasSchemaRegistry05.width - 170, ycanvasSchemaRegistry05Center + 20, green);
+arrow (canvasSchemaRegistry05, 170, ycanvasSchemaRegistry05Center + 20, xcanvasSchemaRegistry05Center - 120, ycanvasSchemaRegistry05Center + 100, green);

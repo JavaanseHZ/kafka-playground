@@ -5,13 +5,29 @@ Playground for Apache Kafka
 ```
 export HOSTNAME=${HOSTNAME}
 ```
-## web interfaces
+## web interfaces / default port
 
-[kafka-topics-ui](http://localhost:3030)
-[adminer (postgres)](http://localhost:18080)
-[kibana (elastic)](http://localhost:5601)
+[kafka-topics-ui / 3030](http://localhost:3030)
+[adminer (postgres) 18080](http://localhost:18080)
+[kibana (elastic) 5601](http://localhost:5601)
 
-## PartnerDubletten
+## Services / default port
+
+[Client Servic / 5000] (https://github.com/JavaanseHZ/kafka-playground/tree/master/client-service)
+[Contract Service / 6000] (https://github.com/JavaanseHZ/kafka-playground/tree/master/contract-service)
+[Contract Type Kstream] (https://github.com/JavaanseHZ/kafka-playground/tree/master/contract-type-kstream)
+[Frontend UI / 4200 or 4400] (https://github.com/JavaanseHZ/kafka-playground/tree/master/frontend-ui)
+[Reverse Proxy for Frontend UI] (https://github.com/JavaanseHZ/kafka-playground/tree/master/reverse-proxy)
+
+## Environment
+
+kafka (fast-data-dev)
+elasticsearch
+kibana
+postgres
+adminer
+
+## Kafka Connect Configuration
 
 ### Kafka Connect JdbcSourceConnector Configuration for Client Duplicates
 1. Create new JDBC Source Connector [kafka-topic-connect-ui](http://localhost:3030/kafka-connect-ui/#/cluster/fast-data-dev/create-connector/io.confluent.connect.jdbc.JdbcSourceConnector)

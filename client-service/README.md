@@ -1,6 +1,18 @@
 # Client Service
 Simple C#/ASP.net Core REST application using Kafka
 
+## Description
+Supports CRUD operations on endpoint /api/client
+
+### Model
+```
+id : uuid
+firstname : string
+lastname : string
+street : string
+city : string
+```
+
 ## Extensions for Visual Studio Code
 - C# (ms-vscode.csharp)
 - Nuget Paket Manager (jmrog.vscode-nuget-package)

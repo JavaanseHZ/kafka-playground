@@ -1,7 +1,7 @@
 # Contract Type Kstream
 Simple Kstream application using Kafka.
 
-#Stream function
+## Stream Functionality
 - Consumes topic ContractCreated
 - Filters topics with contract type "insurance" and "real estate" into separate topics:
 InsuranceContractCreated and RealEstateContractCreated

@@ -12,8 +12,9 @@ InsuranceContractCreated and RealEstateContractCreated
 gradle dockerBuildImage
 ```
 
-## ElasticSinkConnector
-Create Elastic Sink connector:
+## Kafka Connect ElasticSinkConnector Configuration for Event InsuranceContractCreated
+1. Create new Elastic Sink Connector [kafka-topic-connect-ui](http://localhost:3030/kafka-connect-ui/#/cluster/fast-data-dev/create-connector/io.confluent.connect.elasticsearch.ElasticsearchSinkConnector)
+2. Use the follwing Json Configuration
 ```
 {
   "name": "sink-insurance-contract-created-elastic",

@@ -1,0 +1,8 @@
+{
+  "namespace": "de.contract.kafkaevent.id",
+  "type": "record",
+  "name": "Id",
+  "fields": [
+    { "name": "id", "type": "string" }
+  ]
+}

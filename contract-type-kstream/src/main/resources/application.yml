@@ -3,19 +3,22 @@ kafka:
         address: ${KAFKA_HOST:localhost}:9092
     schemaregistry:
         address: http://${KAFKA_HOST:localhost}:8081
+
+    stream:
+        application:
+            id: ${APPLICATION_ID:contract-type-stream}
+
     consumer:
         topic:
             event:
                 contract:
                     created: ContractCreated
-        group:
-            id: contractTypeKstreamGroup
         offset: earliest
     producer:
         topic:
             event:
                 contract:
-                    life:
-                        created: LifeContractCreated
-                    other:
-                        created: OtherContractCreated
+                    insurance:
+                        created: InsuranceContractCreated
+                    realestate:
+                        created: RealEstateContractCreated

@@ -1,7 +1,7 @@
 {
-  "namespace": "de.contract.life.kafkaevent.created",
+  "namespace": "de.contract.insurance.kafkaevent.created",
   "type": "record",
-  "name": "LifeContractCreated",
+  "name": "InsuranceContractCreated",
   "fields": [
     { "name": "id", "type": "string" },
     {
@@ -26,6 +26,7 @@
       ]
     },
     { "name": "type", "type": "string" },
-    { "name": "premium", "type": "double" }
+    { "name": "premium", "type": "double" },
+    { "name": "risk", "type": "string" }
   ]
 }

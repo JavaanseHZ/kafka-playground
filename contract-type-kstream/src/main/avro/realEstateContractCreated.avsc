@@ -1,7 +1,7 @@
 {
-  "namespace": "de.contract.other.kafkaevent.created",
+  "namespace": "de.contract.realestate.kafkaevent.created",
   "type": "record",
-  "name": "OtherContractCreated",
+  "name": "RealEstateContractCreated",
   "fields": [
     { "name": "id", "type": "string" },
     {

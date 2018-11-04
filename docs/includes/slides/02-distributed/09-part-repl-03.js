@@ -16,8 +16,3 @@ rectangle(canvasPartRepl03, 430, ycanvasPartRepl03Center + 100, 120, 80, green, 
 rectangle(canvasPartRepl03, 560, ycanvasPartRepl03Center - 180, 120, 80, green, 'P2-R3', 'black');
 rectangle(canvasPartRepl03, 560, ycanvasPartRepl03Center - 40, 120, 80, yellow, 'P3-R3', 'black');
 rectangle(canvasPartRepl03, 560, ycanvasPartRepl03Center + 100, 120, 80, blue, 'P1-R3', 'black');
-
-
-
-
-

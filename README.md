@@ -62,7 +62,7 @@ VALUES ('[OLD-UUID]', '[NEW-UUID]');
 2. Use the follwing Json Configuration
 ```json
 {
-  "name": "sink-life-contract-created-elastic",
+  "name": "sink-contract-created-elastic",
   "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
   "type.name": "contract",
   "topics": "ContractCreated",

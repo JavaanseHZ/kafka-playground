@@ -1,0 +1,14 @@
+version: '3.2'
+services:
+  kafka:
+    image: landoop/fast-data-dev:2.0.0
+    container_name: kafka
+    ports:
+      - 2181:2181
+      - 3030:3030
+      - 8081-8083:8081-8083
+      - 9092:9092
+    environment:
+     - ADV_HOST=${HOSTNAME}
+     - SAMPLEDATA=0
+     - RUNTESTS=0

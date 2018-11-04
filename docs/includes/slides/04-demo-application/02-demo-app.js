@@ -22,5 +22,5 @@ rectangle(canvasDemoApp, canvasDemoApp.width - 150, ycanvasDemoAppCenter - 140, 
 rectangle(canvasDemoApp, canvasDemoApp.width - 190, ycanvasDemoAppCenter - 20, 50, 40, blue, 'P', 'black');
 rectangle(canvasDemoApp, canvasDemoApp.width - 80, ycanvasDemoAppCenter - 20, 50, 40, yellow, 'C', 'black');
 arrow (canvasDemoApp, xcanvasDemoAppCenter + 170, 55,  canvasDemoApp.width - 170, ycanvasDemoAppCenter - 160, transientWhite);
-arrow (canvasDemoApp, canvasDemoApp.width - 100, ycanvasDemoAppCenter + 40, xcanvasDemoAppCenter + 145, ycanvasDemoAppCenter + 125, transientWhite);
-arrow (canvasDemoApp, xcanvasDemoAppCenter + 145, ycanvasDemoAppCenter + 80, canvasDemoApp.width - 210, ycanvasDemoAppCenter + 40, transientWhite);
+arrow (canvasDemoApp, xcanvasDemoAppCenter + 145, ycanvasDemoAppCenter + 125, canvasDemoApp.width - 100, ycanvasDemoAppCenter + 40, transientWhite);
+arrow (canvasDemoApp, canvasDemoApp.width - 210, ycanvasDemoAppCenter + 40, xcanvasDemoAppCenter + 145, ycanvasDemoAppCenter + 80, transientWhite);

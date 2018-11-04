@@ -12,8 +12,8 @@ rectangle(canvasConnect02, xcanvasConnect02Center - 150, ycanvasConnect02Center 
 rectangle(canvasConnect02, xcanvasConnect02Center - 110, ycanvasConnect02Center + 50, 80, 40, blue, 'Source', 'black');
 rectangle(canvasConnect02, xcanvasConnect02Center + 30, ycanvasConnect02Center + 50, 80, 40, yellow, 'Sink', 'black');
 
-ellipse(canvasConnect02, 50, canvasConnect02.height - 130, 100, 100, purple, 'DB', 'black');
+ellipse(canvasConnect02, 50, canvasConnect02.height - 130, 100, 100, lightBrown, 'DB', 'black');
 arrow (canvasConnect02, 170, canvasConnect02.height - 100, xcanvasConnect02Center - 130, ycanvasConnect02Center + 110, transientWhite);
 
-ellipse(canvasConnect02, canvasConnect02.width - 150, canvasConnect02.height - 130, 100, 100, purple, 'DB', 'black');
+ellipse(canvasConnect02, canvasConnect02.width - 150, canvasConnect02.height - 130, 100, 100, lightBrown, 'DB', 'black');
 arrow (canvasConnect02, xcanvasConnect02Center + 130, ycanvasConnect02Center + 110, canvasConnect02.width - 170, canvasConnect02.height - 100, transientWhite);

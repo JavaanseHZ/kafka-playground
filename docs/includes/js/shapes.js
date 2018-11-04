@@ -45,7 +45,7 @@ function rectangleArray (canvas, x, y, w, h, color, fields) {
 
     rudimentFont.load().then(function (font) {
         var distance = w/fields.length;
-        var pathx = distance;
+        var pathx = x + distance;
         fields.forEach(element => {
             
             if(element != fields[fields.length -1]) {
@@ -63,7 +63,7 @@ function rectangleArray (canvas, x, y, w, h, color, fields) {
             context.font =  h/2 + 'px Rudiment'
             context.textAlign = 'center';
             context.textBaseline = 'middle';
-            context.fillText(element[0], (x + pathx - (distance/2)), (y + (h/2)));
+            context.fillText(element[0], (pathx - (distance/2)), (y + (h/2)));
             
             pathx = (pathx + distance); 
         });

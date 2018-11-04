@@ -11,7 +11,7 @@ arrow (canvasGroupOffset01, xcanvasGroupOffset01Center + 95, ycanvasGroupOffset0
 rectangle(canvasGroupOffset01, xcanvasGroupOffset01Center - 195, ycanvasGroupOffset01Center + 180, 70, 40, burgundy, 'Part 2', 'black');
 rectangleArray(canvasGroupOffset01, xcanvasGroupOffset01Center - 195, ycanvasGroupOffset01Center + 100, 350, 80, burgundy, [['3', 'black'], ['2', 'black'], ['1', 'black'], ['0', 'black']]);
 arrow (canvasGroupOffset01, xcanvasGroupOffset01Center + 135, ycanvasGroupOffset01Center + 30, xcanvasGroupOffset01Center + 135, ycanvasGroupOffset01Center + 80, purple)
-arrow (canvasGroupOffset01, xcanvasGroupOffset01Center + 95, ycanvasGroupOffset01Center + 30, xcanvasGroupOffset01Center + 95, ycanvasGroupOffset01Center + 80, green)
+arrow (canvasGroupOffset01, xcanvasGroupOffset01Center + 10, ycanvasGroupOffset01Center + 30, xcanvasGroupOffset01Center + 10, ycanvasGroupOffset01Center + 80, green)
 
 //Producer
 rectangle(canvasGroupOffset01, 10, ycanvasGroupOffset01Center - 50, 100, 100, blue, 'Prod', 'black');
@@ -32,4 +32,4 @@ rectangle(canvasGroupOffset01, canvasGroupOffset01.width - 150, ycanvasGroupOffs
 
 rectangle(canvasGroupOffset01, canvasGroupOffset01.width - 130, ycanvasGroupOffset01Center + 90, 100, 70, yellow, 'Cons 3', 'black');
 rectangle(canvasGroupOffset01, canvasGroupOffset01.width - 130, ycanvasGroupOffset01Center + 160, 50, 40, yellow, '0', 'black');
-rectangle(canvasGroupOffset01, canvasGroupOffset01.width - 80, ycanvasGroupOffset01Center + 160, 50, 40, yellow, '0', 'black');
+rectangle(canvasGroupOffset01, canvasGroupOffset01.width - 80, ycanvasGroupOffset01Center + 160, 50, 40, yellow, '1', 'black');

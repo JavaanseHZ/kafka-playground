@@ -321,16 +321,34 @@
 							return !!document.querySelector( '[data-external],[data-external-replace]' ); 
 						}
 					},
+					{ src: 'plugin/spotlight/spotlight.js' },
 				],
 				keyboard: {
 					67: function() { RevealChalkboard.toggleNotesCanvas() },	// toggle notes canvas when 'c' is pressed
 					66: function() { RevealChalkboard.toggleChalkboard() },	// toggle chalkboard when 'b' is pressed
 					46: function() { RevealChalkboard.clear() },	// clear chalkboard when 'DEL' is pressed
 					8: function() { RevealChalkboard.reset() },	// reset chalkboard data on current slide when 'BACKSPACE' is pressed
-					68: function() { RevealChalkboard.download() }	// downlad recorded chalkboard drawing when 'd' is pressed
+					68: function() { RevealChalkboard.download()} ,	// downlad recorded chalkboard drawing when 'd' is pressed
+					83: function() { RevealSpotlight.toggleSpotlight()}, 
 				},
 				chalkboard: { 
 					color: [ 'rgba(255,255,255,0.5)', 'rgba(255,255,255,0.5)' ],
+				},
+				spotlight: {
+					// size of the spotlight
+					size: 60,
+					// true: Locks the mouse pointer inside the presentation
+					lockPointerInsideCanvas: false,
+					// toggle spotlight by holding down the mouse key
+					toggleSpotlightOnMouseDown: false,
+					// choose the cursor when spotlight is on. Maybe "crosshair"?
+					presentingCursor: 'none', 
+					// true: cursor is always "none" except when spotlight is on. 
+					presentingCursorOnlyVisibleWhenSpotlightVisible: false,
+					// enable pointer mode
+					useAsPointer: false,
+					// pointer color (If pointer mode enabled)
+					pointerColor: "#FFFFFFAA"
 				},
 			});
 		</script>

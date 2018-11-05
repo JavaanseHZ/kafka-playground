@@ -7,25 +7,25 @@ export HOSTNAME=${HOSTNAME}
 ```
 ## web interfaces / default port
 
-[kafka-topics-ui / 3030](http://localhost:3030)
-[adminer (postgres) 18080](http://localhost:18080)
-[kibana (elastic) 5601](http://localhost:5601)
+* [kafka-topics-ui / 3030](http://localhost:3030)
+* [adminer (postgres) 18080](http://localhost:18080)
+* [kibana (elastic) 5601](http://localhost:5601)
 
 ## Services / default port
 
-[Client Servic / 5000] (https://github.com/JavaanseHZ/kafka-playground/tree/master/client-service)
-[Contract Service / 6000] (https://github.com/JavaanseHZ/kafka-playground/tree/master/contract-service)
-[Contract Type Kstream] (https://github.com/JavaanseHZ/kafka-playground/tree/master/contract-type-kstream)
-[Frontend UI / 4200 or 4400] (https://github.com/JavaanseHZ/kafka-playground/tree/master/frontend-ui)
-[Reverse Proxy for Frontend UI] (https://github.com/JavaanseHZ/kafka-playground/tree/master/reverse-proxy)
+* [Client Service / 5000](https://github.com/JavaanseHZ/kafka-playground/tree/master/client-service)
+* [Contract Service / 6000](https://github.com/JavaanseHZ/kafka-playground/tree/master/contract-service)
+* [Contract Type Kstream](https://github.com/JavaanseHZ/kafka-playground/tree/master/contract-type-kstream)
+* [Frontend UI / 4200 or 4400](https://github.com/JavaanseHZ/kafka-playground/tree/master/frontend-ui)
+* [Reverse Proxy for Frontend UI](https://github.com/JavaanseHZ/kafka-playground/tree/master/reverse-proxy)
 
 ## Environment
 
-kafka (fast-data-dev)
-elasticsearch
-kibana
-postgres
-adminer
+* kafka (fast-data-dev)
+* elasticsearch
+* kibana
+* postgres
+* adminer
 
 ## Kafka Connect Configuration
 

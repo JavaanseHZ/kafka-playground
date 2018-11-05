@@ -2,7 +2,8 @@
 Simple Java/Springboot REST application using Kafka
 
 ## Description
-Supports CRUD operations on endpoint /api/contract
+* Supports CRUD operations on endpoint /api/contract
+* [Example requests](https://github.com/JavaanseHZ/kafka-playground/tree/master/soap-ui) in soap-ui subfolder
 
 ### Model
 ```

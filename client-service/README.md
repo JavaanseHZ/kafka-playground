@@ -2,7 +2,8 @@
 Simple C#/ASP.net Core REST application using Kafka
 
 ## Description
-Supports CRUD operations on endpoint /api/client
+* Supports CRUD operations on endpoint /api/client
+* [Example requests](https://github.com/JavaanseHZ/kafka-playground/tree/master/soap-ui) in soap-ui subfolder
 
 ### Model
 ```

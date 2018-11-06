@@ -3,7 +3,6 @@
   font-family: "Rudiment";
   src: url("../includes/fonts/Rudiment.eot"); /* IE9 Compat Modes */
   src: url("../includes/fonts/Rudiment.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-    url("../includes/fonts/Rudiment.otf") format("opentype"), /* Open Type Font */
     url("../includes/fonts/Rudiment.svg") format("svg"), /* Legacy iOS */
     url("../includes/fonts/Rudiment.ttf") format("truetype"), /* Safari, Android, iOS */
     url("../includes/fonts/Rudiment.woff") format("woff"), /* Modern Browsers */
@@ -27,4 +26,3 @@
 .highlightTextOrange {
   color: #FF8C42;
 }
-

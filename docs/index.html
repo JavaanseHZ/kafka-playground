@@ -25,7 +25,7 @@
 		<script src="plugin/roughjs/workly.min.js"></script>
 	</head>
 	<body>
-		
+
 		<div class="reveal">
 			<div class="slides">
 				<!-- 00 Intro -->
@@ -100,7 +100,7 @@
 				<!-- 02 Distributed Platform -->
 				<section>
 					<section data-external="includes/slides/02-distributed/01-distributed-platform.html"> </section>
-					
+
 					<section data-transition="slide-in fade-out">
 						<div style="min-height: 700px;">
 							<h4 class="headerTop"><span class="highlightTextOrange">Distributed</span> Event-Stream-Processing <span class="highlightTextOrange">Platform</span></h4>
@@ -141,7 +141,7 @@
 							</div>
 						</div>
 					</section>
-					
+
 					<section data-external="includes/slides/02-distributed/03-part-repl.html"> </section>
 					<section data-transition="slide-in fade-out">
 						<div style="min-height: 700px;">
@@ -534,13 +534,11 @@
 				dependencies: [
 					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
 					{ src: 'plugin/chalkboard/chalkboard.js' },
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/roughjs/rough.min.js'},
-					{ src: 'plugin/external/external.js', 
-						condition: function() { 
-							return !!document.querySelector( '[data-external],[data-external-replace]' ); 
+					{ src: 'plugin/external/external.js',
+						condition: function() {
+							return !!document.querySelector( '[data-external],[data-external-replace]' );
 						}
 					},
 					{ src: 'plugin/spotlight/spotlight.js' },
@@ -551,9 +549,9 @@
 					46: function() { RevealChalkboard.clear() },	// clear chalkboard when 'DEL' is pressed
 					8: function() { RevealChalkboard.reset() },	// reset chalkboard data on current slide when 'BACKSPACE' is pressed
 					68: function() { RevealChalkboard.download()} ,	// downlad recorded chalkboard drawing when 'd' is pressed
-					83: function() { RevealSpotlight.toggleSpotlight()}, 
+					83: function() { RevealSpotlight.toggleSpotlight()},
 				},
-				chalkboard: { 
+				chalkboard: {
 					color: [ 'rgba(255,255,255,0.5)', 'rgba(255,255,255,0.5)' ],
 				},
 				spotlight: {
@@ -564,8 +562,8 @@
 					// toggle spotlight by holding down the mouse key
 					toggleSpotlightOnMouseDown: false,
 					// choose the cursor when spotlight is on. Maybe "crosshair"?
-					presentingCursor: 'none', 
-					// true: cursor is always "none" except when spotlight is on. 
+					presentingCursor: 'none',
+					// true: cursor is always "none" except when spotlight is on.
 					presentingCursorOnlyVisibleWhenSpotlightVisible: false,
 					// enable pointer mode
 					useAsPointer: false,

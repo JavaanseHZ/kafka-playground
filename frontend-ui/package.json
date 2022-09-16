@@ -45,7 +45,7 @@
     "@angular/router": "6.0.0",
     "@nebular/theme": "2.0.0-rc.9",
     "@ng-bootstrap/ng-bootstrap": "1.0.0",
-    "bootstrap": "4.0.0",
+    "bootstrap": "4.3.1",
     "classlist.js": "1.1.20150312",
     "core-js": "2.5.1",
     "intl": "1.2.5",
